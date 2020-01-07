@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-wz9184d1t788ka987mo.mysql.rds.aliyuncs.com:3306/video_db?autoReconnect=true&useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=UTC
+    username: video
+    password: 1qaz@WSX
+  devtools:
+    restart:
+      enabled: true     #开启热部署
+  thymeleaf:
+    cache: false        #页面修改后不重启
+server:
+  port: 30097     #项目端口号
+#日志
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        web: warn
+      apache:
+        tomcat: warn
+    com:
+      jushu:
+        video:
+          mapper: debug
