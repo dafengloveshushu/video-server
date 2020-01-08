@@ -5,6 +5,8 @@ import com.jushu.video.api.R;
 import com.jushu.video.entity.GmAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <p>
  * 管理后台管理员用户表 服务类
@@ -28,5 +30,5 @@ public interface IGmAdminService extends IService<GmAdmin> {
      * @param gmAdmin 用户实体
      * @return  GmAdmin不为空成功，为空失败
      */
-    GmAdmin login(GmAdmin gmAdmin);
+    GmAdmin login(GmAdmin gmAdmin, HttpServletRequest request);
 }

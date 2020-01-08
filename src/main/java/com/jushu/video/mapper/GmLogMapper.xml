@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jushu.video.mapper.GmLogMapper">
+
+<!--    <select id="existTable" parameterType="String" resultType="Integer">-->
+<!--        select count(*) from information_schema.TABLES-->
+<!--        where lcase(table_name) = #{tableName}-->
+<!--    </select>-->
+
+
+<!--    <update id="createNewTable" parameterType="String">-->
+<!--        CREATE TABLE #{tableName} (-->
+<!--           id int(11) NOT NULL AUTO_INCREMENT,-->
+<!--          userName varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '用户名',-->
+<!--          loginIp varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '登录IP',-->
+<!--          loginTime datetime(0) NOT NULL COMMENT '登录时间',-->
+<!--          userCreateTime datetime(0) NOT NULL COMMENT '用户注册时间',-->
+<!--          userId varchar(128) NOT NULL COMMENT '用户Id',-->
+<!--          PRIMARY KEY (id) USING BTREE-->
+<!--        )-->
+<!--    </update>-->
+<!--    <insert id="insert" parameterType="com.jushu.video.entity.GmLog">-->
+<!--    insert into `${tableName}`-->
+<!--        (`userName`, `loginIp`, `loginTime`, `userCreateTime`, `userId`)-->
+<!--    values-->
+<!--    (-->
+<!--        #{log.userName},-->
+<!--        #{log.loginIp},-->
+<!--        #{log.loginTime},-->
+<!--        #{log.userCreateTime},-->
+<!--        #{log.userId}-->
+<!--    )-->
+<!--</insert>-->
+</mapper>

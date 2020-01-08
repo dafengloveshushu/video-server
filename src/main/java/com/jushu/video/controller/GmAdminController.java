@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class GmAdminController {
     private IGmAdminService iGmAdminService;
 
     @PostMapping("/login")
-    public ModelAndView login(GmAdmin gmAdmin, HttpSession session) {
+    public ModelAndView login(GmAdmin gmAdmin, HttpSession session, HttpServletRequest request) {
         ModelAndView model = new ModelAndView();
         if(gmAdmin.getAccount() == null || "".equals(gmAdmin.getAccount())) {
             session.invalidate();
@@ -44,7 +45,7 @@ public class GmAdminController {
             model.setViewName("login");
             return model;
         }
-        GmAdmin admin = iGmAdminService.login(gmAdmin);
+        GmAdmin admin = iGmAdminService.login(gmAdmin, request);
         if (admin != null) {
             session.setAttribute("userName",admin.getAccount());
             session.setAttribute("user", admin);
