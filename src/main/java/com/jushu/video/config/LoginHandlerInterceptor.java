@@ -39,7 +39,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         if(user == null) {
             request.setAttribute("msg", "无权限，请先登录!");
             //获取request返回页面到登录页
-            response.sendRedirect(request.getContextPath() + "");
+            response.sendRedirect( "");
             return false;
         }
         return true;

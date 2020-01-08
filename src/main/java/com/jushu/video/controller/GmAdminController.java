@@ -47,9 +47,8 @@ public class GmAdminController {
         GmAdmin admin = iGmAdminService.login(gmAdmin);
         if (admin != null) {
             session.setAttribute("userName",admin.getAccount());
-            model.addObject("msg", "登录成功!");
-            model.addObject("user", admin);
-            model.setViewName("redirect:index");
+            session.setAttribute("user", admin);
+            model.setViewName("forward:index");
             return model;
         } else {
             session.invalidate();
@@ -62,8 +61,16 @@ public class GmAdminController {
 
 
     @RequestMapping("/index")
-    public String index(){
-        return "index";
+    public ModelAndView index(HttpSession session, ModelAndView model){
+        model.addObject("user",session.getAttribute("user"));
+        model.setViewName("index");
+        return model;
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "login";
     }
 
 

@@ -34,7 +34,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 			content : $('#Add_user_style'),
 			btn : [ '保存', '取消' ],
 			yes : function(index, layero) {
-				if ($("#name").val() == "") {
+				if ($("#username").val() == "") {
 					alertDialog("登录用户名不能为空");
 					return;
 				}
