@@ -2,6 +2,9 @@ package com.jushu.video.entity;
 
 import java.util.Date;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -100,6 +103,4 @@ public class GmAdmin implements Serializable {
      * 最后操作账号
      */
     private String lastUpdaterName;
-
-
 }

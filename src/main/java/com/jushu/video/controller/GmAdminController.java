@@ -5,10 +5,13 @@ import com.jushu.video.api.R;
 import com.jushu.video.entity.GmAdmin;
 import com.jushu.video.service.IGmAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -18,12 +21,51 @@ import org.springframework.web.bind.annotation.RestController;
  * @author chen
  * @since 2020-01-07
  */
-@RestController
+@Controller
 @RequestMapping("/video/gm-admin")
 public class GmAdminController {
 
     @Autowired
     private IGmAdminService iGmAdminService;
+
+    @PostMapping("/login")
+    public ModelAndView login(GmAdmin gmAdmin, HttpSession session) {
+        ModelAndView model = new ModelAndView();
+        if(gmAdmin.getAccount() == null || "".equals(gmAdmin.getAccount())) {
+            session.invalidate();
+            model.addObject("msg", "账号不能为空!");
+            model.setViewName("login");
+            return model;
+        }
+        if(gmAdmin.getPassword() == null || "".equals(gmAdmin.getPassword())) {
+            session.invalidate();
+            model.addObject("account", gmAdmin.getAccount());
+            model.addObject("msg", "密码不能为空!");
+            model.setViewName("login");
+            return model;
+        }
+        GmAdmin admin = iGmAdminService.login(gmAdmin);
+        if (admin != null) {
+            session.setAttribute("userName",admin.getAccount());
+            model.addObject("msg", "登录成功!");
+            model.addObject("user", admin);
+            model.setViewName("redirect:index");
+            return model;
+        } else {
+            session.invalidate();
+            model.addObject("account", gmAdmin.getAccount());
+            model.addObject("msg", "未找到该用户!");
+            model.setViewName("login");
+            return model;
+        }
+    }
+
+
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
+    }
+
 
     @RequestMapping("/save")
     public R save(@RequestBody GmAdmin gmAdmin) {
