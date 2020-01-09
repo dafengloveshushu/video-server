@@ -11,8 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>
@@ -65,6 +63,13 @@ public class GmAdminController {
     public ModelAndView index(HttpSession session, ModelAndView model){
         model.addObject("user",session.getAttribute("user"));
         model.setViewName("index");
+        return model;
+    }
+
+    @RequestMapping("/home")
+    public ModelAndView home(HttpSession session, ModelAndView model){
+        model.addObject("user",session.getAttribute("user"));
+        model.setViewName("home");
         return model;
     }
 

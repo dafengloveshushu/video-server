@@ -3,7 +3,6 @@ package com.jushu.video.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +14,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author chen
- * @since 2020-01-08
+ * @since 2020-01-09
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -33,7 +32,6 @@ public class GmOperation implements Serializable {
     /**
      * 管理员ID
      */
-    @TableField("userId")
     private String userId;
 
     /**
@@ -55,6 +53,11 @@ public class GmOperation implements Serializable {
      * 操作时间
      */
     private Date operationTime;
+
+    /**
+     * IP地址
+     */
+    private String loginIp;
 
     /**
      * 是否成功 (0成功、1失败)

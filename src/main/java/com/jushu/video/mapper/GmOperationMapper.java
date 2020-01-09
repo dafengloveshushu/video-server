@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author chen
- * @since 2020-01-08
+ * @since 2020-01-09
  */
 public interface GmOperationMapper extends BaseMapper<GmOperation> {
 

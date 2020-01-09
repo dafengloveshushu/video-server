@@ -26,80 +26,80 @@
                             <li>
                                 <label class="label_name">用户名</label>
                                 <div class="xinxi">
-                                    <b th:text="${account}" ></b>
+                                    <b th:text="${user.adminName}" ></b>
                                 </div>
                             </li>
                             <li>
-                                <label class="label_name">角色</label>
+                                <label class="label_name">手机号</label>
                                 <div class="xinxi">
-                                    <b th:text="${role}" ></b>
+                                    <b th:text="${user.adminPhone}" ></b>
                                 </div>
                             </li>
                             <li>
-                                <label class="label_name">最后登录IP</label>
+                                <label class="label_name">创建时间</label>
                                 <div class="xinxi">
-                                    <b th:text="${lastLoginIp}" ></b>
+                                    <b th:text="${#dates.format(user.createTime, 'yyyy-MM-dd HH:mm:ss')}" ></b>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <!--结束-->
-                <div class="frame ddgl_style">
-                    <span class="title_name">系统信息</span>
-                    <div class="content">
-                        <ul class="xj_list clearfix">
-                            <li>
-                                <label class="label_name">IP地址</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.hostIp}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">主机名</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.hostName}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">操作系统</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.osName}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">系统架构</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.arch}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">系统版本</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.osVersion}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">处理器个数</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.processors}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">Java版本</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.javaVersion}"></b>
-                                </div>
-                            </li>
-                            <li>
-                                <label class="label_name">Java路径</label>
-                                <div class="xinxi">
-                                    <b th:text="${systemInfo.javaHome}"></b>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<!--                <div class="frame ddgl_style">-->
+<!--                    <span class="title_name">系统信息</span>-->
+<!--                    <div class="content">-->
+<!--                        <ul class="xj_list clearfix">-->
+<!--                            <li>-->
+<!--                                <label class="label_name">IP地址</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.hostIp}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">主机名</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.hostName}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">操作系统</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.osName}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">系统架构</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.arch}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">系统版本</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.osVersion}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">处理器个数</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.processors}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">Java版本</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.javaVersion}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <label class="label_name">Java路径</label>-->
+<!--                                <div class="xinxi">-->
+<!--                                    <b th:text="${systemInfo.javaHome}"></b>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </div>-->
                 <!--结束-->
             </div>
             <!-- 首页样式结束 -->

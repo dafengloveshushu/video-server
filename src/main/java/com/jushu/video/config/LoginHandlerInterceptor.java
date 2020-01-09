@@ -2,7 +2,6 @@ package com.jushu.video.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,7 +38,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
         if(user == null) {
             request.setAttribute("msg", "无权限，请先登录!");
             //获取request返回页面到登录页
-            response.sendRedirect( "");
+            response.sendRedirect( "/");
             return false;
         }
         return true;
