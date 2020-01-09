@@ -1,7 +1,7 @@
 <div class="navbar" id="navbar">
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a th:href="index.html" class="navbar-brand">
+            <a th:href="@{/video/gm-admin/index}" class="navbar-brand">
                 <span id="titleName"><b>后台管理系统</b></span>
             </a>
         </div>
@@ -14,20 +14,4 @@
             </div>
         </div>
     </div>
-</div>
-<!-- update password -->
-<div class="change_Pass_style" id="change_Pass">
-    <ul class="xg_style">
-        <li>
-            <label for="password" class="label_name">原&nbsp;&nbsp;密&nbsp;码</label>
-            <input name="oldPwd" type="password" ng-model="compositePwd.originPwd" id="password"/>
-        </li>
-        <li>
-            <label for="Nes_pas" class="label_name">新&nbsp;&nbsp;密&nbsp;码</label>
-            <input name="newPwd" type="password" ng-model="compositePwd.confirmPwd" id="Nes_pas"/>
-        </li>
-        <li>
-            <label for="c_mew_pas" class="label_name">确认密码</label><input name="confirmPwd" type="password" ng-model="compositePwd.newPwd" id="c_mew_pas"/>
-        </li>
-    </ul>
 </div>

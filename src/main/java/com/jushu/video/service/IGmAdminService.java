@@ -1,9 +1,7 @@
 package com.jushu.video.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.jushu.video.api.R;
-import com.jushu.video.entity.GmAdmin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jushu.video.entity.GmAdmin;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,6 +26,7 @@ public interface IGmAdminService extends IService<GmAdmin> {
     /**
      * 账号密码登录
      * @param gmAdmin 用户实体
+     * @param request 获取当前用户登录ip地址
      * @return  GmAdmin不为空成功，为空失败
      */
     GmAdmin login(GmAdmin gmAdmin, HttpServletRequest request);

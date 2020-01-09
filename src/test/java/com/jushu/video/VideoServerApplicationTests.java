@@ -129,7 +129,7 @@ class VideoServerApplicationTests {
         strategy.setRestControllerStyle(true);
         //写于父类中的公共字段
 //        strategy.setSuperEntityColumns("");
-        String tableNames = "movie_main,movie_parts";
+        String tableNames = "gm_operation";
         strategy.setInclude(tableNames.split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

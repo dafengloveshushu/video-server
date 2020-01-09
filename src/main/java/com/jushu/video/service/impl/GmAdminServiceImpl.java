@@ -1,20 +1,16 @@
 package com.jushu.video.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jushu.video.common.IpUtil;
 import com.jushu.video.entity.GmAdmin;
 import com.jushu.video.entity.GmLog;
-import com.jushu.video.entity.GmOperation;
 import com.jushu.video.mapper.GmAdminMapper;
 import com.jushu.video.mapper.GmLogMapper;
-import com.jushu.video.mapper.GmOperationMapper;
 import com.jushu.video.service.IGmAdminService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,8 +34,8 @@ public class GmAdminServiceImpl extends ServiceImpl<GmAdminMapper, GmAdmin> impl
     @Autowired
     private GmLogMapper gmLogMapper;
 
-    @Autowired
-    private GmOperationMapper gmOperationMapper;
+//    @Autowired
+//    private GmOperationMapper gmOperationMapper;
 
     @Override
     public boolean save(GmAdmin entity) {

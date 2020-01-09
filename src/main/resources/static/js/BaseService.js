@@ -128,15 +128,15 @@ base.factory("$jsonToFormData",function() {
         },
         template:'<div>'+
                  '<div class="page_style">'+
-                 '<select ng-model="pageSize" size="1" name="pageSize" ng-change="changePS()" ng-options="ps as ps for ps in pageSizeArr "  ng-selected="ps==pageSize"  >'+
+                 '<select ng-model="pages.size" size="1" name="size" ng-change="changePS()" ng-options="ps as ps for ps in pageSizeArr "  ng-selected="ps==pages.size"  >'+
                  '</select>'+
                  '<a href="" ng-click="pageChange(1)" class="icon-step-backward page_btn"></a>'+
                  '<a href="" ng-click="pageChange(currentPage-1>0?currentPage-1:1)" class="icon-caret-left page_btn"></a>第'+
-                 '<select ng-model="currentPage" ng-change="changePS()" ng-options="num as num for num in pagenums" ng-selected="num==currentPage" name="pageSelect" size="1" >'+
+                 '<select ng-model="pages.current" ng-change="changePS()" ng-options="num as num for num in pagenums" ng-selected="num==pages.current" name="pageSelect" size="1" >'+
                  '</select>'+
-                  '<label>共</label><strong ng-bind="pageCount"></strong><label>页</label>'+
-                  '<a href="" ng-click="pageChange(currentPage+1<=pageCount?currentPage+1:pageCount)"  class=" icon-caret-right page_btn"></a>'+
-                 '<a href="" ng-click="pageChange(pageCount)" class="icon-step-forward page_btn"></a>'+
+                  '<label>共</label><strong ng-bind="pages.total"></strong><label>页</label>'+
+                  '<a href="" ng-click="pageChange(pages.current+1<=pages.total?pages.current+1:pages.total)"  class=" icon-caret-right page_btn"></a>'+
+                 '<a href="" ng-click="pageChange(pages.total)" class="icon-step-forward page_btn"></a>'+
                  '</div>'+
     		     '</div>',
         link: function(scope, element, attrs) {
@@ -145,7 +145,7 @@ base.factory("$jsonToFormData",function() {
           scope.lastText = angular.isDefined(attrs.lastText) ? attrs.lastText : pageConfig.lastText;
           scope.prevText = angular.isDefined(attrs.prevText) ? attrs.prevText : pageConfig.prevText;
           scope.nextText = angular.isDefined(attrs.nextText) ? attrs.nextText : pageConfig.nextText;
-          scope.requestPage = {"pageNo":1,"pageSize":10};
+          scope.requestPage = {"pages.current":1,"pages..size":10};
           scope.currentPage = 1;
           scope.pageCount = -1;
           scope.resultCount = 0;
@@ -158,11 +158,11 @@ base.factory("$jsonToFormData",function() {
           
           scope.pageChange = function(page) {
         	nextFlag = true;
-        	if(scope.pageCount == -1) return;
-            if (page >= 1 && page <= scope.pageCount) {
-              scope.currentPage = page;
+        	if(scope.total == -1) return;
+            if (page >= 1 && page <= scope.total) {
+              scope.current = page;
             } else {
-              scope.currentPage = 1;
+              scope.current = 1;
             }
           };
           function build() {
@@ -185,7 +185,7 @@ base.factory("$jsonToFormData",function() {
                   scope.pagenums.push(i);
               }
           }
-          scope.$watch('currentPage+pageCount+pageSize', function() {
+          scope.$watch('current+total+size', function() {
 	            if(nextFlag){
 	            	build();
 	            }
@@ -198,7 +198,7 @@ base.factory("$jsonToFormData",function() {
         			scope.clickSearch = 'F5CurrentPage';
         		}
         	}else{
-        		scope.currentPage = 1;
+        		scope.current = 1;
         	}
           	if(!startNoRequest){
           		build();
@@ -212,8 +212,8 @@ base.factory("$jsonToFormData",function() {
         	  if(angular.isUndefined(attrs.url)){
         		  return;
         	  }
-        	  scope.requestPage.pageNo = scope.currentPage;
-        	  scope.requestPage.pageSize = scope.pageSize;
+        	  scope.requestPage.pageNo = scope.current;
+        	  scope.requestPage.pageSize = scope.size;
         	  scope.requestPage.resultCount = scope.resultCount;
         	  baseService.postWithPage(_ctx+attrs.url,scope.requestPage,scope.requestPageParams).then(function(response){
         		  if(response.code==0){
@@ -222,9 +222,9 @@ base.factory("$jsonToFormData",function() {
         				  scope.returnPageRows =scope.returnPageRows.concat(response[attrs.returnPageRows]);
         			  }
         			  if(!response.page) return;
-        			  scope.currentPage = response.page.pageNo;
-        			  scope.pageCount  = response.page.pageCount;
-        			  scope.pageSize = response.page.pageSize;
+        			  scope.current = response.page.pageNo;
+        			  scope.total  = response.page.pageCount;
+        			  scope.size = response.page.pageSize;
         			  scope.resultCount = response.page.resultCount;
         			  init(scope.pageCount);
         		  }else{

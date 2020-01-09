@@ -1,5 +1,7 @@
 package com.jushu.video.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jushu.video.entity.MovieMain;
 import com.jushu.video.mapper.MovieMainMapper;
 import com.jushu.video.service.IMovieMainService;
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain> implements IMovieMainService {
 
+    @Override
+    public Page<MovieMain> getMovieMainPageList(Page page, MovieMain movieMain) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        //封装查询条件
+        //queryWrapper.eq("director", movieMain.getDirector());
+        return baseMapper.selectPage(page, queryWrapper);
+    }
 }
