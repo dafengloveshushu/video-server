@@ -2,13 +2,16 @@ package com.jushu.video.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jushu.video.api.ParamFilter;
 import com.jushu.video.entity.GmOperation;
 import com.jushu.video.mapper.GmOperationMapper;
 import com.jushu.video.service.IGmOperationService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -22,10 +25,15 @@ import java.util.List;
 public class GmOperationServiceImpl extends ServiceImpl<GmOperationMapper, GmOperation> implements IGmOperationService {
 
     @Override
-    public Page<GmOperation> operationPageList(Page page, GmOperation gmOperation) {
+    public Page<GmOperation> operationPageList(Page page, ParamFilter paramFilter) {
         QueryWrapper<GmOperation> queryWrapper = new QueryWrapper<>();
-        if(gmOperation.getUserName() != null) {
-            queryWrapper.eq("user_name", gmOperation.getUserName());
+        if(paramFilter.getParam() != null) {
+            Map<String, Object> map = new HashMap<>();
+            map = paramFilter.getParam();
+            String userName = (String) map.get("userName");
+            if(userName != null || userName != "") {
+                queryWrapper.eq("user_name", userName);
+            }
         }
         return baseMapper.selectPage(page, queryWrapper);
     }

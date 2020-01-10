@@ -1,5 +1,6 @@
 package com.jushu.video.api;
 
+
 /**
  * @author 大奉
  * @date 2020/1/8 12:21
@@ -7,6 +8,9 @@ package com.jushu.video.api;
  */
 public class Response implements ResponseCode {
     private Object data;
+
+    private Pages page;
+
     //默认为0表示响应正常
     private int code = 0;
 
@@ -17,6 +21,11 @@ public class Response implements ResponseCode {
 
     public Response(Object data) {
         this.data = data;
+    }
+
+    public Response(Object data, Pages page) {
+        this.data = data;
+        this.page = page;
     }
 
     public Response(String msg) {
@@ -44,6 +53,14 @@ public class Response implements ResponseCode {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public Pages getPage() {
+        return page;
+    }
+
+    public void setPage(Pages page) {
+        this.page = page;
     }
 
 }
