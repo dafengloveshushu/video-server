@@ -24,11 +24,11 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
         //queryWrapper.eq("director", movieMain.getDirector());
         return baseMapper.selectPage(page, queryWrapper);
     }
-    @Override
-    public MovieMain movieList(GmAdmin gmAdmin) {
-        QueryWrapper<MovieMain> movieQueryWrapper = new QueryWrapper<>();
-        movieQueryWrapper.eq("account", gmAdmin.getAccount());
-        movieQueryWrapper.eq("password", gmAdmin.getPassword());
-        return baseMapper.selectOne(movieQueryWrapper);
-    }
+//    @Override
+//    public MovieMain movieList(GmAdmin gmAdmin) {
+//        QueryWrapper<MovieMain> movieQueryWrapper = new QueryWrapper<>();
+//        movieQueryWrapper.eq("account", gmAdmin.getAccount());
+//        movieQueryWrapper.eq("password", gmAdmin.getPassword());
+//        return baseMapper.selectOne(movieQueryWrapper);
+//    }
 }
