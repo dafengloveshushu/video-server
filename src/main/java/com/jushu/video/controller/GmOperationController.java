@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jushu.video.api.Pages;
 import com.jushu.video.api.ParamFilter;
 import com.jushu.video.api.Response;
+import com.jushu.video.common.IpUtil;
 import com.jushu.video.entity.GmOperation;
 import com.jushu.video.service.IGmOperationService;
 import org.slf4j.Logger;
@@ -12,6 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <p>
@@ -39,7 +43,7 @@ public class GmOperationController {
 
         @PostMapping("/list")
         @ResponseBody
-        public Response list(@RequestBody ParamFilter queryFilter) {
+        public Response list(@RequestBody ParamFilter queryFilter, HttpServletRequest request, HttpSession session) {
             //new 一个mybatis plus分页对象
             Page<GmOperation> page = new Page<>();
             //pages为自己封装的分页，对应页面
@@ -56,8 +60,29 @@ public class GmOperationController {
             Page<GmOperation> operationList = iGmOperationService.operationPageList(page, queryFilter);
             //得到总记录数，页面上自动计算页数
             pages.setResultCount((int) operationList.getTotal());
-            //返回数据至页面
-            return new Response(operationList.getRecords(), pages);
+            //获取当前方法名
+            String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+            //操作事件
+            String operation = "查询管理员操作列表";
+            //当前用户登录IP
+            String loginIp = IpUtil.getIpAddr(request);
+            //操作是否成功
+            int isSuccess = 0;
+            //备注：查询成功 || 查询失败
+            String remark = null;
+            if(operationList != null) {
+                //返回数据至页面
+                remark = "查询成功";
+                iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+                return new Response(operationList.getRecords(), pages);
+            } else {
+                //返回数据至页面
+                isSuccess = 1;
+                remark = "查询失败";
+                iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+                return new Response("数据出现错误!");
+            }
+
         }
 
 }

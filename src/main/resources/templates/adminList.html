@@ -43,21 +43,12 @@
                     </tr>
                     </thead>
                     <tbody>
-<!--                    <tr th:each="operation : ${operationList}">-->
-<!--                        <td th:text="${operation.userName}"></td>-->
-<!--                        <td th:text="${operation.method}"></td>-->
-<!--                        <td th:text="${operation.operation}"></td>-->
-<!--                        <td th:text="${#dates.format(operation.operationTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
-<!--                        <td th:text="${operation.isSuccess}"></td>-->
-<!--                        <td th:text="${operation.loginIp}"></td>-->
-<!--                        <td th:text="${operation.remark}"></td>-->
-<!--                    </tr>-->
                     <tr ng-repeat="operation in data">
                         <td ng-bind="operation.userName"></td>
                         <td ng-bind="operation.method"></td>
                         <td ng-bind="operation.operation"></td>
                         <td ng-bind="operation.operationTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
-                        <td ng-bind="operation.isSuccess"></td>
+                        <td ng-bind="operation.isSuccess==0?'成功':'失败'"></td>
                         <td ng-bind="operation.loginIp"></td>
                         <td ng-bind="operation.remark"></td>
                     </tr>

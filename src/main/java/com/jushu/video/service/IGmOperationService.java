@@ -5,6 +5,7 @@ import com.jushu.video.api.ParamFilter;
 import com.jushu.video.entity.GmOperation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -24,4 +25,13 @@ public interface IGmOperationService extends IService<GmOperation> {
      * @return  集合
      */
     Page<GmOperation> operationPageList(Page page, ParamFilter paramFilter);
+
+
+    /**
+     * 新增一条操作记录
+     * @param method    操作方法
+     * @param loginIp   当前ip
+     * @return  ture为成功，false失败
+     */
+    boolean saveOperation(String method, String loginIp, String operation, int isSuccess, String remark, HttpSession session);
 }
