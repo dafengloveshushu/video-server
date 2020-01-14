@@ -30,101 +30,34 @@
 </head>
 <body ng-controller="dictCtrl">
 <div class="page-content" style="height:100%;padding:0;">
-    <div id="treeMenu" style="width:20%;float: left;border-right: 2px solid #ccc;">
-        <div style="height: 40px;line-height: 40px;">
-            <div style="text-align: center;background: #0679CC;color: white;">
-                字典管理
-            </div>
-            <div>
-                <a  href="javascript:void(0)" style="display: none;"></a>
-                <a href="javascript:void(0)"></a>
-            </div>
-        </div>
-        <div style="height: 463px;overflow:auto;">
-            <div id="jstree"></div>
-        </div>
-    </div>
     <div id="content" style="width: 80%;float: right;height: 100%;overflow: auto;">
         <div class="Res commonManager">
             <div class="table_res_list">
                 <table style="text-align: center;" id="Res_list" cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>字典Code</th>
-                        <th>字典值</th>
-                        <th>是否目录</th>
-                        <th>创建日期</th>
-                        <th>最后更新日期</th>
-                        <th>描述</th>
+                        <th>剧名</th>
+                        <th>类型</th>
+                        <th>标签</th>
+                        <th>上映时间、地点</th>
+                        <th>播放时长</th>
+                        <th>记录数</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="dict in dictList">
-                        <td class="atxt_name" ng-bind="dict.code"></td>
-                        <td class="atxt_name" ng-bind="dict.name"></td>
-                        <td class="atxt_name" ng-bind="dict.isCatagory=='Y'? '是':'否'"></td>
-                        <td ng-bind="dict.createTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
-                        <td ng-bind="dict.updateTime | date:'yyyy-MM-dd HH:mm:ss'"></td>
-                        <td ng-bind="dict.remark"></td>
+                    <tr ng-repeat="movie in data">
+                        <td ng-bind="movie.movieName"></td>
+                        <td ng-bind="movie.电视剧"></td>
+                        <td ng-bind="movie.tags"></td>
+                        <td ng-bind="movie.year"></td>
+                        <td ng-bind="movie.watchTime"></td>
+                        <td ng-bind="movie.counts"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <form name="form"  >
-        <div id="Add_Dic_style" style="display: none">
-            <div class="commonManager ">
-                <div class="addCommon">
-                    <ul class="clearfix">
-                        <li ng-show="formTypeList.length">
-                            <label class="label_name">父分类</label>
-                            <select name="selectType" type="text" ng-model="dict.parentId"  ng-options="(m.id) as m.name for m in formTypeList"
-                                    ht-select-ajax="{url:'/dict/getCatagory',field:'formTypeList'}"  ht-validate="{required:true}"  class="text_add">
-                            </select>
-                        </li>
-                        <li>
-                            <label class="label_name">字典Code</label>
-                            <label>
-                                <input name="name" ng-model="dict.code" type="text" value=""
-                                       class="text_add" ht-validate="{required:true}" />
-                            </label>
-                        </li>
-                        <li>
-                            <label class="label_name">字典名称</label>
-                            <label>
-                                <input name="name" ng-model="dict.name" type="text" value=""
-                                       class="text_add" ht-validate="{required:true}" />
-                            </label>
-                        </li>
-                        <li>
-                            <label class="label_name">是否分类</label>&#12288;&#12288;
-                            <label>
-                                <input name="isCatagory" ng-model="dict.isCatagory" type="radio" value="Y"
-                                       class="text_add" ht-validate="{required:true}" />是&#12288;&#12288;
-
-                            </label>
-                            <label>
-                                <input name="isCatagory" ng-model="dict.isCatagory" type="radio" value="N"
-                                       class="text_add" ht-validate="{required:true}" />否
-                            </label>
-                        </li>
-                    </ul>
-                    <div class="Remark" style="padding-top: 20px;">
-                        <label class="label_name">备注</label>
-                        <label>
-                                <textarea name="remark" ng-model="dict.remark" cols="" rows=""
-                                    style="width: 456px; height: 100px; padding: 5px;"></textarea>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-layer-btn">
-                <a class="layui-layer-btn0" ht-save="/dict/add" ng-model="dict">保存</a>
-                <a class="layui-layer-btn1">取消</a>
-            </div>
-        </div>
-    </form>
 </div>
 </body>
 <script>

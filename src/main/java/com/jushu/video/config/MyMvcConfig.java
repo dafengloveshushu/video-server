@@ -23,6 +23,6 @@ public class MyMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/","/login.html","/403.html","/404.html","/favicon.ico")
                 .excludePathPatterns("/assets/**","/css/**","/images/**","/js/**")
-                .excludePathPatterns("/video/gm-admin/login", "/video/movie-main/list");
+                .excludePathPatterns("/video/gm-admin/login");
     }
 }

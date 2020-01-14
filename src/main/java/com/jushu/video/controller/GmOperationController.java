@@ -29,16 +29,16 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/video/gm-operation")
 public class GmOperationController {
 
-    private Logger logger = LoggerFactory.getLogger(GmOperationController.class);
+        private Logger logger = LoggerFactory.getLogger(GmOperationController.class);
 
 
-    @Autowired
-    private IGmOperationService iGmOperationService;
+        @Autowired
+        private IGmOperationService iGmOperationService;
 
-    @GetMapping("/list")
-    public String list(){
-        return "adminList";
-    }
+        @GetMapping("/list")
+        public String list(){
+            return "adminList";
+        }
 
 
         @PostMapping("/list")
@@ -46,7 +46,7 @@ public class GmOperationController {
         public Response list(@RequestBody ParamFilter queryFilter, HttpServletRequest request, HttpSession session) {
             //new 一个mybatis plus分页对象
             Page<GmOperation> page = new Page<>();
-            //pages为自己封装的分页，对应页面
+            //pages为自己封装的分页工具类，对应页面
             Pages pages = queryFilter.getPage();
             //如果pages不为空，则为page放入当前页、每页显示条数
             if(pages != null) {
@@ -82,7 +82,6 @@ public class GmOperationController {
                 iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
                 return new Response("数据出现错误!");
             }
-
         }
 
 }
