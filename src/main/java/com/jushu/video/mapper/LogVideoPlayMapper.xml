@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jushu.video.mapper.LogVideoPlayMapper">
+<!--    <resultMap id="movieMap" type="com.jushu.video.entity.LogVideoPlay">-->
+<!--        <result column="movieId" property="movieId"/>-->
+<!--        <result column="movieName" property="movieName"/>-->
+<!--        <result column="movieType" property="movieType"/>-->
+<!--        <result column="tags" property="tags"/>-->
+<!--        <result column="year" property="year"/>-->
+<!--        <result column="watchTime" property="watchTime"/>-->
+<!--        <result column="counts" property="counts"/>-->
+<!--    </resultMap>-->
+
+
+<!--    <select id="selectListPage" resultMap="movieMap" resultType="com.jushu.video.entity.LogVideoPlay">-->
+<!--        SELECT lvp.id,lvp.movieName,mm.movieType,mm.tags,mm.year,lvp.watchTime,count(*) as counts FROM log_video_play lvp-->
+<!--        left join movie_main mm on lvp.movieId = mm.id-->
+<!--        <where>-->
+<!--            1 = 1-->
+<!--            <if test="tags != null and tags != ''">-->
+<!--                and mm.tags like concat('%', #{logVideoPlay.tags}. '%')-->
+<!--            </if>-->
+<!--            <if test="movieName != null and movieName != ''">-->
+<!--                and lvp.movieName like concat('%', #{logVideoPlay.movieName}, '%')-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        group by mm.id-->
+<!--        order by counts desc-->
+<!--    </select>-->
+</mapper>

@@ -34,7 +34,7 @@ public class GmOperationServiceImpl extends ServiceImpl<GmOperationMapper, GmOpe
             Map<String, Object> map = new HashMap<>();
             map = paramFilter.getParam();
             String userName = (String) map.get("userName");
-            if(userName != null || userName != "") {
+            if(userName != null) {
                 queryWrapper.eq("user_name", userName);
             }
         }
@@ -46,12 +46,24 @@ public class GmOperationServiceImpl extends ServiceImpl<GmOperationMapper, GmOpe
     public boolean saveOperation(String method, String loginIp, String operation, int isSuccess, String remark, HttpSession session) {
         boolean flag = false;
         GmAdmin gmAdmin = (GmAdmin) session.getAttribute("user");
+        if (gmAdmin == null) {
+            return flag;
+        }
         GmOperation gmOperation = new GmOperation();
         gmOperation.setUserId(gmAdmin.getAdminId());
         gmOperation.setUserName(gmAdmin.getAdminName());
+        if(operation == null) {
+            return flag;
+        }
         gmOperation.setOperation(operation);
+        if(method == null) {
+            return flag;
+        }
         gmOperation.setMethod(method);
         gmOperation.setOperationTime(new Date());
+        if(loginIp == null) {
+            return flag;
+        }
         gmOperation.setLoginIp(loginIp);
         gmOperation.setIsSuccess(isSuccess);
         gmOperation.setRemark(remark);
