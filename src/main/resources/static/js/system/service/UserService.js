@@ -5,8 +5,8 @@ userApp.service('userService', ['$http', '$q', 'baseService',
                     var url = _ctx + '/user/add';
                     return baseService.post(url,user);
                 },
-                deleteUser: function(json) {
-                    var url = _ctx + '/user/delete';
+                deleteMovie: function(json) {
+                    var url = _ctx + '/video/movie-main/delete';
                     return baseService.post(url,json);
                 },
                 resetPwd: function(json) {

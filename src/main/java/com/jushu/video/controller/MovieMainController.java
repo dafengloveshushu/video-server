@@ -61,4 +61,13 @@ public class MovieMainController {
         return new Response(movieMainList.getRecords(), pages);
     }
 
+    @PostMapping("/delete")
+    @ResponseBody
+    public Response delete(@RequestBody List<String> movieIds) {
+        if(movieIds == null || movieIds.size() <= 0){
+            return new Response("用户编号不能为空");
+        }
+        return new Response(movieIds);
+    }
+
 }

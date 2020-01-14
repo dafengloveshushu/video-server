@@ -120,24 +120,24 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 	}
 	
 	//删除用户
-	$scope.deleteUser = function(){
+	$scope.deleteMovie = function(){
 		var selectArray = $("#User_list tbody input:checked");
 		if(!selectArray || selectArray.length==0){
-			alertDialog("请选择用户");
+			alertDialog("请选择电影");
 			return;
 		}
-		var userIds = new Array();
+		var movieIds = new Array();
 		$.each(selectArray,function(i,e){
 			var val = $(this).val();
-			userIds.push(val);
+			movieIds.push(val);
 		});
-		if(userIds.lenght==0){
+		if(movieIds.lenght==0){
 			return;
 		}
-		layer.confirm('是否删除用户？', {
+		layer.confirm('是否删除电影？', {
 			btn : [ '确定', '取消' ]
 		}, function() {
-			userService.deleteUser(userIds).then(function(resp){
+			userService.deleteMovie(movieIds).then(function(resp){
 				layer.msg(resp.msg, {
 					time : 1000,
 					icon : 1
