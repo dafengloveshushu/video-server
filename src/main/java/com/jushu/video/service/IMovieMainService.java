@@ -24,4 +24,6 @@ public interface IMovieMainService extends IService<MovieMain> {
      * @return list
      */
     Page<MovieMain> getMovieMainPageList(Page page, ParamFilter paramFilter);
+
+    Boolean delete(String[] movieIds) throws RuntimeException;
 }

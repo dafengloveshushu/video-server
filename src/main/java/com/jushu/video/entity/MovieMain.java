@@ -115,5 +115,12 @@ public class MovieMain implements Serializable {
     @TableField("lastRefreshDate")
     private LocalDate lastRefreshDate;
 
+    /**
+     * 是否为vip资源
+     */
+    @TableField("isVip")
+    private Boolean isVip;
+
+
 
 }

@@ -63,11 +63,18 @@ public class MovieMainController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public Response delete(@RequestBody List<String> movieIds) {
-        if(movieIds == null || movieIds.size() <= 0){
-            return new Response("用户编号不能为空");
+    public Response delete(@RequestBody String[] movieIds) {
+        try {
+            if (movieIds == null || movieIds.length <= 0) {
+                return new Response("用户编号不能为空");
+            }
+            if (!iMovieMainService.delete(movieIds)) {
+                return new Response("删除失败");
+            }
+            return new Response("删除成功");
+        }catch (RuntimeException e){
+            return new Response(e.getMessage());
         }
-        return new Response(movieIds);
     }
 
 }
