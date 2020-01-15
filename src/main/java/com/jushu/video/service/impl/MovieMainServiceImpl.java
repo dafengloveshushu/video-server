@@ -3,15 +3,17 @@ package com.jushu.video.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jushu.video.api.ParamFilter;
+import com.jushu.video.entity.GmAdmin;
 import com.jushu.video.entity.MovieMain;
 import com.jushu.video.mapper.MovieMainMapper;
+import com.jushu.video.mapper.MoviePartsMapper;
 import com.jushu.video.service.IMovieMainService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -23,6 +25,9 @@ import java.util.Map;
  */
 @Service
 public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain> implements IMovieMainService {
+
+    @Autowired
+    private MoviePartsMapper moviePartsMapper;
 
     @Override
     public Page<MovieMain> getMovieMainPageList(Page page, ParamFilter paramFilter) {
@@ -46,5 +51,23 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
             //queryWrapper.eq("director", movieMain.getDirector());
         }
         return baseMapper.selectPage(page, queryWrapper);
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Boolean delete(String[] idList) throws RuntimeException{
+        try {
+            if (idList == null || idList.length <= 0) {
+                return false;
+            }
+            Map<String, Object> map = new HashMap<>();
+            for (String id : idList) {
+                map.put("movieId", Integer.valueOf(id));
+                moviePartsMapper.deleteByMap(map);
+            }
+            return baseMapper.deleteBatchIds(Arrays.asList(idList)) > 0;
+        }catch (RuntimeException e){
+            throw new RuntimeException("删除失败");
+        }
     }
 }
