@@ -62,15 +62,18 @@ public class GmOperationController {
             String loginIp = IpUtil.getIpAddr(request);
             //操作是否成功
             int isSuccess = 0;
-            //备注：查询成功 || 查询失败
-            String remark = null;
-            remark = "查询成功";
-            iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
-            Page<GmOperation> operationList = iGmOperationService.operationPageList(page, queryFilter);
-            //得到总记录数，页面上自动计算页数
-            pages.setResultCount((int) operationList.getTotal());
-            //返回数据至页面
-            return new Response(operationList.getRecords(), pages);
+            //备注：查询成功
+            String remark = "查询成功";
+            boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+            if(flag) {
+                Page<GmOperation> operationList = iGmOperationService.operationPageList(page, queryFilter);
+                //得到总记录数，页面上自动计算页数
+                pages.setResultCount((int) operationList.getTotal());
+                //返回数据至页面
+                return new Response(operationList.getRecords(), pages);
+            } else {
+                return new Response("数据出现问题，请联系管理员!");
+            }
         }
 
 }
