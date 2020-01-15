@@ -34,8 +34,6 @@ public class GmAdminServiceImpl extends ServiceImpl<GmAdminMapper, GmAdmin> impl
     @Autowired
     private GmLogMapper gmLogMapper;
 
-//    @Autowired
-//    private GmOperationMapper gmOperationMapper;
 
     @Override
     public boolean save(GmAdmin entity) {
@@ -47,8 +45,6 @@ public class GmAdminServiceImpl extends ServiceImpl<GmAdminMapper, GmAdmin> impl
     @Override
     public GmAdmin login(GmAdmin gmAdmin, HttpServletRequest  request) {
         logger.info("用户登录开始---");
-        //获取当前方法名，供打点管理员操作记录表使用
-        //String method = Thread.currentThread().getStackTrace()[1].getMethodName();
         QueryWrapper<GmAdmin> gmAdminQueryWrapper = new QueryWrapper<>();
         gmAdminQueryWrapper.eq("account", gmAdmin.getAccount());
         gmAdminQueryWrapper.eq("password", gmAdmin.getPassword());

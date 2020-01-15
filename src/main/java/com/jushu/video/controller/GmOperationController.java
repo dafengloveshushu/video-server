@@ -29,15 +29,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/video/gm-operation")
 public class GmOperationController {
 
-        private Logger logger = LoggerFactory.getLogger(GmOperationController.class);
-
-
         @Autowired
         private IGmOperationService iGmOperationService;
 
         @GetMapping("/list")
         public String list(){
-            return "adminList";
+            return "webLogList";
         }
 
 
@@ -57,9 +54,6 @@ public class GmOperationController {
                 page.setCurrent(1);
                 page.setSize(10);
             }
-            Page<GmOperation> operationList = iGmOperationService.operationPageList(page, queryFilter);
-            //得到总记录数，页面上自动计算页数
-            pages.setResultCount((int) operationList.getTotal());
             //获取当前方法名
             String method = Thread.currentThread().getStackTrace()[1].getMethodName();
             //操作事件
@@ -70,18 +64,13 @@ public class GmOperationController {
             int isSuccess = 0;
             //备注：查询成功 || 查询失败
             String remark = null;
-            if(operationList != null) {
-                //返回数据至页面
-                remark = "查询成功";
-                iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
-                return new Response(operationList.getRecords(), pages);
-            } else {
-                //返回数据至页面
-                isSuccess = 1;
-                remark = "查询失败";
-                iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
-                return new Response("数据出现错误!");
-            }
+            remark = "查询成功";
+            iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+            Page<GmOperation> operationList = iGmOperationService.operationPageList(page, queryFilter);
+            //得到总记录数，页面上自动计算页数
+            pages.setResultCount((int) operationList.getTotal());
+            //返回数据至页面
+            return new Response(operationList.getRecords(), pages);
         }
 
 }
