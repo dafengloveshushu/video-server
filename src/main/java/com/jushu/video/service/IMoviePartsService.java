@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-01-08
  */
 public interface IMoviePartsService extends IService<MovieParts> {
-
+    MovieParts detail(Integer movieId);
 }

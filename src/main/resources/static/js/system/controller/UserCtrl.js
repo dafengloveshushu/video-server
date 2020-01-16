@@ -177,7 +177,6 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 		});
 	}
 
-
 	//电影添加vip标签
 	$scope.delVipTag = function(){
 		var selectArray = $("#User_list tbody input:checked");
@@ -207,58 +206,31 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 		});
 	}
 
-	$scope.asignRole = function(userId){
-		var selectArray = $("#User_list tbody input:checked");
-		if(!selectArray || selectArray.length!=1){
-			alertDialog("请选择一个用户");
-			return;
-		}
-		var userId;
-		$.each(selectArray,function(i,e){
-			var val = $(this).val();
-			userId =val;
-		});
-		var includeRolesMap = [];
-		var excludeRolesMap = [];
-		userService.getRoleMap(userId).then(function(response){
-			$scope.roleIds = response.data.roleIds;
-			$.each(response.data.roleList,function(i,roleMap){
-				var roleId = roleMap.roleId;
-				if($scope.roleIds.indexOf(roleId)>=0){
-					var roleObj = {'roleId':roleId,'name':roleMap.name};
-					includeRolesMap.push(roleObj);
-				}else{
-					var roleObj = {'roleId':roleId,'name':roleMap.name};
-					excludeRolesMap.push(roleObj);
-				}
-			});
-			$scope.roleMap = excludeRolesMap;
-			$scope.includeRoleMap =includeRolesMap;
-		});
+	$scope.asignRole = function(movieId){
+		console.log(movieId);
+		// var videoUrl;
+		userService.videoUrl(movieId).then(function(resp) {
+			var videoUrl = resp.data.videoUrl;
+			console.log(resp);
+			// console.log(videoUrl);
+		console.log(videoUrl)
+		var videoObject = {
+			container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
+			variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+			flashplayer:false,//如果强制使用flashplayer则设置成true
+			video:videoUrl//视频地址
+			// video:'wetsite:[["https://meng.wuyou-zuida.com/20191106/21592_fbccf5f2/index.m3u8"],["https://hong.tianzhen-zuida.com/20191211/15858_3d58cb6c/index.m3u8"],["https://hong.tianzhen-zuida.com/20191218/16356_1008c2d2/index.m3u8"]]'//视频地址
+		};
+		// console.log(videoUrl);
+		var player=new ckplayer(videoObject);
 		layer.open({
 		   type : 1,
-		   title : "角色分配",
+		   title : "视频播放",
 		   maxmin : true,
 		   shadeClose : true, //点击遮罩关闭层
-		   area : [ '576px', '468px' ],
-		   content : $('#asignRole'),
-		   btn : [ '保存', '取消' ],
-		   yes : function(index, layero) {
-			   var roleIds = [];
-			   $("#multiselect_to option").each(function(i,e){
-				   var selectVal = $(this).val();
-				   roleIds.push(selectVal);
-			   });
-			   var param = {"userId":userId,"roleIds":roleIds};
-				userService.saveUserRole(param).then(function(response){
-					layer.alert(response.msg, {
-						title : '提示框',
-						icon : 6,
-					},function(){
-						layer.closeAll();
-					});
-				});
-		   }});
+		   area : [ '610px', '450px' ],
+		   content : $('#asignRole')});		});
+
 	}
 	
 	$scope.selectAll = function($event){

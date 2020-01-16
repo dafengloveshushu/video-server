@@ -110,7 +110,8 @@ div.navbar{
     border-color: #7369AE !important;
 }
 .assignBtn:hover{
-    background-color: #3F3661 !important;
+    /*background-color: #3F3661 !important;*/
+    background-color: #f0f7fc !important;
 }
 
 .queryBtn{

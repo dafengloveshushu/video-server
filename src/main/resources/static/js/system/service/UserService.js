@@ -17,9 +17,9 @@ userApp.service('userService', ['$http', '$q', 'baseService',
                     var url = _ctx + '/video/movie-main/delVip';
                     return baseService.post(url,user);
                 },
-                detail: function(userId) {
-                    var url = _ctx + '/user/detail';
-                    return baseService.post(url,userId);
+                videoUrl: function(movieId) {
+                    var url = _ctx + '/video/movie-parts/detail';
+                    return baseService.post(url,movieId);
                 },
                 getRoleMap: function(userId) {
                     var url = _ctx + '/role/getRoleMap';

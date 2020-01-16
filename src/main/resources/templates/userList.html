@@ -50,6 +50,8 @@
                     <button type="button" class="btn btn-primary deleteBtn" ng-click="deleteMovie()">删除</button>
                     <button type="button" class="btn btn-primary resetBtn" ng-click="addVipTag()" >添加vip标签</button>
                     <button type="button" class="btn btn-primary assignBtn" ng-click="delVipTag()"  >移除vip标签</button>
+                    <button type="button" class="btn btn-primary assignBtn" ng-click="asignRole()"  >播放</button>
+
                 </ul>
                 <div id="Add_user_style" style="display: none">
                     <div class="addCommon clearfix">
@@ -105,24 +107,7 @@
                 </div>
 
                 <div id="asignRole" style="height:100%;display: none;">
-                    <div class="col-xs-5" style="height: 100%;" >
-                        <select name="from[]" id="multiselect" style="height: 100%;"  class="form-control" size="8" multiple="multiple">
-                            <option style="text-align:center;" ng-repeat="map in roleMap"  value="{{map.roleId}}" ng-bind="map.name"></option>
-                        </select>
-                    </div>
-
-                    <div class="col-xs-2" style="margin: 20% 0;">
-                        <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-                        <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-                        <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-                        <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
-                    </div>
-
-                    <div class="col-xs-5" style="height: 100%;" >
-                        <select name="to[]" style="height: 100%;"  id="multiselect_to" class="form-control" size="8" multiple="multiple">
-                            <option  style="text-align:center;" ng-repeat="role in includeRoleMap"  value="{{role.roleId}}" ng-bind="role.name"></option>
-                        </select>
-                    </div>
+                    <div id="video" style="width:600px;height:400px;"></div>
                 </div>
 
             </div>
@@ -146,6 +131,7 @@
                         <th>电影名</th>
                         <th>电影标签</th>
                         <th>vip资源</th>
+                        <th>播放视频</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -163,6 +149,9 @@
                         <td ng-bind="model.name"></td>
                         <td ng-bind="model.tags"></td>
                         <td ng-bind="model.isVip==true?'是':'否'"></td>
+                        <td>
+                            <button type="button" class="btn btn-primary assignBtn" ng-click="asignRole(model.id)"  >播放</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -172,17 +161,15 @@
         </div>
     </div>
 </div>
-<span>播放器</span>
 <!--<embed src="http://www.ckplayer.com/ckplayer/x/ckplayer.swf" flashvars="video=https://rescdn.yishihui.com/longvideo/transcode/video/vpc/20191123/121873657cHQKZk4IROhfmNiKX.m3u8"  quality="high" width="480" height="400" align="middle" allowScriptAccess="always" allowFullscreen="true" type="application/x-shockwave-flash"></embed>-->
-<div id="video" style="width:600px;height:400px;"></div>
-<script type="text/javascript">
-    var videoObject = {
-        container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
-        variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
-        flashplayer:false,//如果强制使用flashplayer则设置成true
-        video:'https://hong.tianzhen-zuida.com/20191120/14260_7d2e3176/index.m3u8'//视频地址
-    };
-    var player=new ckplayer(videoObject);
-</script>
+<!--<script type="text/javascript">-->
+<!--    var videoObject = {-->
+<!--        container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class-->
+<!--        variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象-->
+<!--        flashplayer:false,//如果强制使用flashplayer则设置成true-->
+<!--        video:'https://hong.tianzhen-zuida.com/20191120/14260_7d2e3176/index.m3u8'//视频地址-->
+<!--    };-->
+<!--    var player=new ckplayer(videoObject);-->
+<!--</script>-->
 </body>
 </html>
