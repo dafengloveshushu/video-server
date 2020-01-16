@@ -66,7 +66,7 @@ public class MovieMainController {
     public Response delete(@RequestBody String[] movieIds) {
         try {
             if (movieIds == null || movieIds.length <= 0) {
-                return new Response("用户编号不能为空");
+                return new Response("电影编号不能为空");
             }
             if (!iMovieMainService.delete(movieIds)) {
                 return new Response("删除失败");
@@ -77,4 +77,35 @@ public class MovieMainController {
         }
     }
 
+    @PostMapping("/addVip")
+    @ResponseBody
+    public Response addVip(@RequestBody String[] movieIds) {
+        try {
+            if (movieIds == null || movieIds.length <= 0) {
+                return new Response("电影编号不能为空");
+            }
+            if (!iMovieMainService.addVip(movieIds)) {
+                return new Response("添加标签失败");
+            }
+            return new Response("添加标签成功");
+        }catch (RuntimeException e){
+            return new Response(e.getMessage());
+        }
+    }
+
+    @PostMapping("/delVip")
+    @ResponseBody
+    public Response deleteVip(@RequestBody String[] movieIds) {
+        try {
+            if (movieIds == null || movieIds.length <= 0) {
+                return new Response("电影编号不能为空");
+            }
+            if (!iMovieMainService.deleteVip(movieIds)) {
+                return new Response("移除标签失败");
+            }
+            return new Response("移除标签成功");
+        }catch (RuntimeException e){
+            return new Response(e.getMessage());
+        }
+    }
 }

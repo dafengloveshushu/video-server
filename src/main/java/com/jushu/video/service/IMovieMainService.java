@@ -26,4 +26,8 @@ public interface IMovieMainService extends IService<MovieMain> {
     Page<MovieMain> getMovieMainPageList(Page page, ParamFilter paramFilter);
 
     Boolean delete(String[] movieIds) throws RuntimeException;
+
+    Boolean deleteVip(String[] movieIds) throws RuntimeException;
+
+    Boolean addVip(String[] movieIds) throws RuntimeException;
 }

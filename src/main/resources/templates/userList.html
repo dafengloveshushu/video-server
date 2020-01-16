@@ -48,8 +48,8 @@
 <!--                    <button type="button" class="btn btn-primary updateBtn" ng-click="updateUser(0)"  shiro:hasPermission="/user/edit">修改-->
 <!--                    </button>-->
                     <button type="button" class="btn btn-primary deleteBtn" ng-click="deleteMovie()">删除</button>
-<!--                    <button type="button" class="btn btn-primary resetBtn" ng-click="resetPwd()" shiro:hasPermission="/user/resetPwd">重置密码</button>-->
-<!--                    <button type="button" class="btn btn-primary assignBtn" ng-click="asignRole()"  shiro:hasPermission="/user/addRoles" >角色分配</button>-->
+                    <button type="button" class="btn btn-primary resetBtn" ng-click="addVipTag()" >添加vip标签</button>
+                    <button type="button" class="btn btn-primary assignBtn" ng-click="delVipTag()"  >移除vip标签</button>
                 </ul>
                 <div id="Add_user_style" style="display: none">
                     <div class="addCommon clearfix">
@@ -145,6 +145,7 @@
                         <th>电影类型</th>
                         <th>电影名</th>
                         <th>电影标签</th>
+                        <th>vip资源</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -161,6 +162,7 @@
                         <td ng-bind="model.movieType"></td>
                         <td ng-bind="model.name"></td>
                         <td ng-bind="model.tags"></td>
+                        <td ng-bind="model.isVip==true?'是':'否'"></td>
                     </tr>
                     </tbody>
                 </table>

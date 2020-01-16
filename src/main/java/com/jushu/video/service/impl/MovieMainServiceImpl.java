@@ -1,6 +1,7 @@
 package com.jushu.video.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jushu.video.api.ParamFilter;
 import com.jushu.video.entity.GmAdmin;
@@ -66,6 +67,40 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
                 moviePartsMapper.deleteByMap(map);
             }
             return baseMapper.deleteBatchIds(Arrays.asList(idList)) > 0;
+        }catch (RuntimeException e){
+            throw new RuntimeException("删除失败");
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Boolean deleteVip(String[] idList) throws RuntimeException{
+        try {
+            MovieMain movieMain = new MovieMain();
+            movieMain.setIsVip(false);
+            UpdateWrapper updateWrapper = new UpdateWrapper();
+            if (idList == null || idList.length <= 0) {
+                return false;
+            }
+            updateWrapper.in("id", idList);
+            return baseMapper.update(movieMain, updateWrapper) > 0;
+        }catch (RuntimeException e){
+            throw new RuntimeException("删除失败");
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public Boolean addVip(String[] idList) throws RuntimeException{
+        try {
+            MovieMain movieMain = new MovieMain();
+            movieMain.setIsVip(true);
+            UpdateWrapper updateWrapper = new UpdateWrapper();
+            if (idList == null || idList.length <= 0) {
+                return false;
+            }
+            updateWrapper.in("id", idList);
+            return baseMapper.update(movieMain, updateWrapper) > 0;
         }catch (RuntimeException e){
             throw new RuntimeException("删除失败");
         }

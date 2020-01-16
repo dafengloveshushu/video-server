@@ -119,7 +119,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 		});
 	}
 	
-	//删除用户
+	//删除电影
 	$scope.deleteMovie = function(){
 		var selectArray = $("#User_list tbody input:checked");
 		if(!selectArray || selectArray.length==0){
@@ -138,6 +138,65 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 			btn : [ '确定', '取消' ]
 		}, function() {
 			userService.deleteMovie(movieIds).then(function(resp){
+				layer.msg(resp.msg, {
+					time : 1000,
+					icon : 1
+				},function(){
+					window.location.reload();
+				});
+			});
+		});
+	}
+
+	//电影添加vip标签
+	$scope.addVipTag = function(){
+		var selectArray = $("#User_list tbody input:checked");
+		if(!selectArray || selectArray.length==0){
+			alertDialog("请选择电影");
+			return;
+		}
+		var movieIds = new Array();
+		$.each(selectArray,function(i,e){
+			var val = $(this).val();
+			movieIds.push(val);
+		});
+		if(movieIds.lenght==0){
+			return;
+		}
+		layer.confirm('是否添加vip标签？', {
+			btn : [ '确定', '取消' ]
+		}, function() {
+			userService.addVipTag(movieIds).then(function(resp){
+				layer.msg(resp.msg, {
+					time : 1000,
+					icon : 1
+				},function(){
+					window.location.reload();
+				});
+			});
+		});
+	}
+
+
+	//电影添加vip标签
+	$scope.delVipTag = function(){
+		var selectArray = $("#User_list tbody input:checked");
+		if(!selectArray || selectArray.length==0){
+			alertDialog("请选择电影");
+			return;
+		}
+		var movieIds = new Array();
+		$.each(selectArray,function(i,e){
+			var val = $(this).val();
+			movieIds.push(val);
+		});
+		if(movieIds.lenght==0){
+			return;
+		}
+		layer.confirm('是否移除vip标签？', {
+			btn : [ '确定', '取消' ]
+		}, function() {
+			userService.delVipTag(movieIds).then(function(resp){
 				layer.msg(resp.msg, {
 					time : 1000,
 					icon : 1

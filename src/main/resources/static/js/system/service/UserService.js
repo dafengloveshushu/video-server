@@ -9,12 +9,12 @@ userApp.service('userService', ['$http', '$q', 'baseService',
                     var url = _ctx + '/video/movie-main/delete';
                     return baseService.post(url,json);
                 },
-                resetPwd: function(json) {
-                    var url = _ctx + '/user/resetPwd';
+                addVipTag: function(json) {
+                    var url = _ctx + '/video/movie-main/addVip';
                     return baseService.post(url,json);
                 },
-                editUser: function(user) {
-                    var url = _ctx + '/user/edit';
+                delVipTag: function(user) {
+                    var url = _ctx + '/video/movie-main/delVip';
                     return baseService.post(url,user);
                 },
                 detail: function(userId) {
