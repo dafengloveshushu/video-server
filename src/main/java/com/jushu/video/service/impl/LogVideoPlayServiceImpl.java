@@ -10,6 +10,7 @@ import com.jushu.video.mapper.LogVideoPlayMapper;
 import com.jushu.video.service.ILogVideoPlayService;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,19 @@ public class LogVideoPlayServiceImpl extends ServiceImpl<LogVideoPlayMapper, Log
     @Override
     public List<LogVideoPlay> selectListPage(Page page, ParamFilter paramFilter) {
         QueryWrapper queryWrapper = new QueryWrapper();
+        Calendar calendar = Calendar.getInstance();
+        //获取当前年份
+        int year = calendar.get(Calendar.YEAR);
+        //获取当前月份
+        int month = calendar.get(Calendar.MONTH) + 1;
+        //当前表名
+        String tableName = null;
+        if(String.valueOf(month).length() == 1) {
+            tableName = "log_video_play_" + year + 0 + month;
+        } else {
+            tableName = "log_video_play_" + year + month;
+        }
+        //如果当前月份长度为1 则在前面加上0
         if (paramFilter.getParam() != null) {
             Map<String, Object> map = new HashMap<>();
             map = paramFilter.getParam();
@@ -45,13 +59,6 @@ public class LogVideoPlayServiceImpl extends ServiceImpl<LogVideoPlayMapper, Log
         }
         queryWrapper.groupBy("mm.id");
         queryWrapper.orderByDesc("counts");
-        return baseMapper.selectListPage(page, queryWrapper);
+        return baseMapper.selectListPage(page, tableName, queryWrapper);
     }
-
-//    @Override
-////    public List<LogVideoPlay> logVideoPlayListPage(String tags, String movieName, Page page)
-//    public List<LogVideoPlay> logVideoPlayListPage(Page page) {
-////        return baseMapper.selectListPage(tags, movieName, page);
-//        return baseMapper.selectListPage(page);
-//    }
 }
