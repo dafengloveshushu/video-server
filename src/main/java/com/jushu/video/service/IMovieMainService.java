@@ -30,4 +30,11 @@ public interface IMovieMainService extends IService<MovieMain> {
     Boolean deleteVip(String[] movieIds) throws RuntimeException;
 
     Boolean addVip(String[] movieIds) throws RuntimeException;
+
+    /**
+     * 根据电影名查询电影
+     * @param movieName 电影名
+     * @return 电影记录
+     */
+    MovieMain getMovieMainOne(String movieName);
 }

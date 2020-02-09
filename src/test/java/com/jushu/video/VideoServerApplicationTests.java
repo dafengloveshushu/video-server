@@ -10,7 +10,10 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+import com.jushu.video.entity.MenuRecommend;
+import com.jushu.video.service.IMenuRecommendService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -18,6 +21,20 @@ import java.util.List;
 
 @SpringBootTest
 class VideoServerApplicationTests {
+
+    @Autowired
+    private IMenuRecommendService iMenuRecommendService;
+
+    @Test
+    void contextTest(){
+        List<MenuRecommend> recommendList = iMenuRecommendService.recommendList();
+        for (MenuRecommend menuRecommend : recommendList) {
+            System.out.println(menuRecommend.getId());
+            System.out.println(menuRecommend.getMovieIds());
+            System.out.println(menuRecommend.getMovieName());
+            System.out.println(menuRecommend.getTitle());
+        }
+    }
 
     @Test
     void contextLoads() {
@@ -129,7 +146,7 @@ class VideoServerApplicationTests {
         strategy.setRestControllerStyle(true);
         //写于父类中的公共字段
 //        strategy.setSuperEntityColumns("");
-        String tableNames = "log_video_play";
+        String tableNames = "menu_recommend";
         strategy.setInclude(tableNames.split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

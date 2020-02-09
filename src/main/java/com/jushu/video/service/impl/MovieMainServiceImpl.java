@@ -105,4 +105,11 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
             throw new RuntimeException("删除失败");
         }
     }
+
+    @Override
+    public MovieMain getMovieMainOne(String movieName) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("name", movieName);
+        return baseMapper.selectOne(queryWrapper);
+    }
 }
