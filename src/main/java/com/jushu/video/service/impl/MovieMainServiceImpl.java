@@ -107,6 +107,13 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
     }
 
     @Override
+    public MovieMain getMovieMainOne(String movieName) {
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.eq("name", movieName);
+        return baseMapper.selectOne(queryWrapper);
+    }
+
+    @Override
     public List<String> getMovieTypes(){
         List<String> types = new ArrayList<String>();
         QueryWrapper queryWrapper = new QueryWrapper();
