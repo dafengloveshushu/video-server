@@ -170,4 +170,33 @@ public class MovieMainController {
             return new Response(e.getMessage());
         }
     }
+
+    @GetMapping("/getMovieTypes")
+    @ResponseBody
+    public Response getMovieTypes(HttpServletRequest request, HttpSession session) {
+        //分页数据集合
+        List<String> types = iMovieMainService.getMovieTypes();
+        //获取当前方法名
+        String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+        //操作事件
+        String operation = "查询电影类型";
+        //当前用户登录IP
+        String loginIp = IpUtil.getIpAddr(request);
+        //操作是否成功
+        int isSuccess = 0;
+        //备注：查询成功 || 查询失败
+        String remark = null;
+        if(types != null) {
+            //返回数据至页面
+            remark = "查询成功";
+            iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+            return new Response(types);
+        } else {
+            //返回数据至页面
+            isSuccess = 1;
+            remark = "查询失败";
+            iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+            return new Response("数据出现错误!");
+        }
+    }
 }

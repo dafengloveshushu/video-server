@@ -206,7 +206,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 		});
 	}
 
-	$scope.asignRole = function(movieId){
+	$scope.playVideo = function(movieId){
 		console.log(movieId);
 		// var videoUrl;
 		userService.videoUrl(movieId).then(function(resp) {
