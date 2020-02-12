@@ -206,32 +206,28 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 		});
 	}
 
-	$scope.asignRole = function(movieId){
-		console.log(movieId);
+	$scope.asignRole = function(){
+		var movieId = $("#movieId").val();
 		// var videoUrl;
-		userService.videoUrl(movieId).then(function(resp) {
+		userService.getMovieParts(movieId).then(function(resp) {
 			var videoUrl = resp.data.videoUrl;
-			console.log(resp);
+			var videoObject = {
+				container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
+				variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+				flashplayer:false,//如果强制使用flashplayer则设置成true
+				video:videoUrl//视频地址
+				// video:'wetsite:[["https://meng.wuyou-zuida.com/20191106/21592_fbccf5f2/index.m3u8"],["https://hong.tianzhen-zuida.com/20191211/15858_3d58cb6c/index.m3u8"],["https://hong.tianzhen-zuida.com/20191218/16356_1008c2d2/index.m3u8"]]'//视频地址
+			};
 			// console.log(videoUrl);
-		console.log(videoUrl)
-		var videoObject = {
-			container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
-			variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
-			flashplayer:false,//如果强制使用flashplayer则设置成true
-			video:videoUrl//视频地址
-			// video:'wetsite:[["https://meng.wuyou-zuida.com/20191106/21592_fbccf5f2/index.m3u8"],["https://hong.tianzhen-zuida.com/20191211/15858_3d58cb6c/index.m3u8"],["https://hong.tianzhen-zuida.com/20191218/16356_1008c2d2/index.m3u8"]]'//视频地址
+			var player=new ckplayer(videoObject);
+			layer.open({
+			   type : 1,
+			   title : "视频播放",
+			   maxmin : true,
+			   shadeClose : true, //点击遮罩关闭层
+			   area : [ '610px', '450px' ],
+			   content : $('#asignRole')});		});
 		};
-		// console.log(videoUrl);
-		var player=new ckplayer(videoObject);
-		layer.open({
-		   type : 1,
-		   title : "视频播放",
-		   maxmin : true,
-		   shadeClose : true, //点击遮罩关闭层
-		   area : [ '610px', '450px' ],
-		   content : $('#asignRole')});		});
-
-	}
 	
 	$scope.selectAll = function($event){
 		var target = $event.target

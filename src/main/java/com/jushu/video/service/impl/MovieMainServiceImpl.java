@@ -112,4 +112,13 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
         queryWrapper.eq("name", movieName);
         return baseMapper.selectOne(queryWrapper);
     }
+
+    @Override
+    public MovieMain getMovieMainById(Integer movieId) {
+        MovieMain movieMain = baseMapper.selectById(movieId);
+        if(movieMain != null) {
+            return movieMain;
+        }
+        return null;
+    }
 }

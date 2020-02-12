@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="userApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/assets/css/ace.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/ace-rtl.min.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/ace-skins.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/home.css}"/>
+    <header th:replace="importCommon"></header>
+    <script th:src="@{/js/system/controller/UserCtrl.js}"></script>
+    <script th:src="@{/js/system/service/UserService.js}"></script>
+    <script th:src="@{/assets/select-mutiple/js/multiselect.min.js}"></script>
+    <script th:src="@{/assets/select-mutiple/js/prettify.min.js}"></script>
+    <script th:src="@{/js/system/ckplayer/ckplayer.min.js}"></script>
+    <title>详情介绍</title>
+    <style type="text/css">
+        .index_style  li{
+            width: 32% !important;
+        }
+        #movieDetail {
+            position: relative;
+            right: -290px;
+            top: -390px;
+        }
+        #movieParts {
+            position: relative;
+            right: -10px;
+            top: -260px;
+        }
+        #movieParts_li {
+            display: inline;
+        }
+    </style>
+</head>
+<body ng-controller="userCtrl">
+<div>
+    <div>
+        <article>
+            <div style="text-align: left;position: relative;right: -10px;">
+                <img th:src="${movie.imgUrl}"/>
+                <div id="movieDetail">
+                <span class="title_name">
+                   <b th:text="${movie.name}"></b>
+                </span>
+                    <ul class="clearfix">
+                        <li style="width:524px;">
+                            <label class="label_name">状态:</label>
+                            <b th:text="${movie.statusText}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">主演:</label>
+                            <b th:text="${movie.actors}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">类型:</label>
+                            <b th:text="${movie.movieType}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">更新时间:</label>
+                            <b th:text="${movie.lastRefreshDate}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">导演:</label>
+                            <b th:text="${movie.director}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">地区:</label>
+                            <b th:text="${movie.country}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">年份:</label>
+                            <b th:text="${movie.year}" ></b>
+                        </li>
+                        <li style="width:524px;">
+                            <label class="label_name">剧情简介:</label>
+                            <b th:text="${movie.reviews}" ></b>
+                        </li>
+                    </ul>
+                </div>
+                <div id="asignRole" style="height:100%;display: none;">
+                    <div id="video" style="width:600px;height:400px;"></div>
+                </div>
+                <div id="movieParts">
+                    <span class="title_name">点击下方链接进行播放</span>
+                    <ul class="xj_list clearfix">
+                        <li>
+                            <div id="movieParts_li" class="xinxi" th:each="part : ${partsList}">
+                                <input type="hidden" id="movieId" th:value="${part.id}"/>
+                                <button type="button" class="btn btn-primary assignBtn" ng-click="asignRole()">
+                                    <b th:text="${part.title}"></b>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+</body>
+</html>

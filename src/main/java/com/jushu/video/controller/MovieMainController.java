@@ -7,11 +7,15 @@ import com.jushu.video.api.ParamFilter;
 import com.jushu.video.api.Response;
 import com.jushu.video.common.IpUtil;
 import com.jushu.video.entity.MovieMain;
+import com.jushu.video.entity.MovieParts;
 import com.jushu.video.service.IGmOperationService;
 import com.jushu.video.service.IMovieMainService;
+import com.jushu.video.service.IMoviePartsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,6 +38,8 @@ public class MovieMainController {
     private IMovieMainService iMovieMainService;
     @Autowired
     private IGmOperationService iGmOperationService;
+    @Autowired
+    private IMoviePartsService iMoviePartsService;
 
 
     @GetMapping("/list")
@@ -169,5 +175,41 @@ public class MovieMainController {
         }catch (RuntimeException e){
             return new Response(e.getMessage());
         }
+    }
+
+
+    @GetMapping("/detail")
+    public ModelAndView detailMovieMain(Integer movieId, HttpServletRequest request, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+        if (movieId == 0) {
+            modelAndView.addObject("msg", "参数不能为空!");
+            return modelAndView;
+        }
+        //获取当前方法名
+        String method = Thread.currentThread().getStackTrace()[1].getMethodName();
+        //操作事件
+        String operation = "查询电影详情";
+        //当前用户登录IP
+        String loginIp = IpUtil.getIpAddr(request);
+        //操作是否成功
+        int isSuccess = 0;
+        //备注：查询成功
+        String remark = "查询成功";
+        boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+        if (flag) {
+            MovieMain movieMainById = iMovieMainService.getMovieMainById(movieId);
+            if (movieMainById != null) {
+                List<MovieParts> movieParts = iMoviePartsService.detailList(movieId);
+                if (movieParts != null) {
+                    modelAndView.addObject("partsList", movieParts);
+                }
+                modelAndView.addObject("movie", movieMainById);
+                modelAndView.setViewName("movieDetail");
+            }
+        } else {
+            modelAndView.addObject("msg", "数据出现错误!");
+            return modelAndView;
+        }
+        return modelAndView;
     }
 }

@@ -3,6 +3,8 @@ package com.jushu.video.service;
 import com.jushu.video.entity.MovieParts;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IMoviePartsService extends IService<MovieParts> {
     MovieParts detail(Integer movieId);
+
+
+    List<MovieParts> detailList(Integer movieId);
 }

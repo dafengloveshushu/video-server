@@ -17,9 +17,13 @@ userApp.service('userService', ['$http', '$q', 'baseService',
                     var url = _ctx + '/video/movie-main/delVip';
                     return baseService.post(url,user);
                 },
-                videoUrl: function(movieId) {
-                    var url = _ctx + '/video/movie-parts/detail';
+                getMovieMain: function(movieId) {
+                    var url = _ctx + '/video/movie-main/detail';
                     return baseService.post(url,movieId);
+                },
+                getMovieParts: function(movieId) {
+            	    var url = _ctx + '/video/movie-parts/detail';
+            	    return baseService.post(url,movieId);
                 },
                 getRoleMap: function(userId) {
                     var url = _ctx + '/role/getRoleMap';
