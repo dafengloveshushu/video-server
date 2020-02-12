@@ -59,30 +59,30 @@
                             <li>
                                 <label class="label_name">用户名</label>
                                 <label for="name"></label>
-                                <input name="account" ng-model="user.account" type="text"  id="name"/>
+                                <input name="account" ng-model="movie.account" type="text"  id="name"/>
                                 <i style="color: #F60;">*</i>
                             </li>
                             <li>
                                 <label class="label_name">密码</label>
                                 <label for="password"></label>
-                                <input name="password" ng-model="user.password" type="password"
+                                <input name="password" ng-model="movie.password" type="password"
                                        id="password"/>
                                 <i style="color: #F60;">*</i>
                             </li>
                             <li>
                                 <label class="label_name">手机号</label>
                                 <label for="phone"></label>
-                                <input name="mobile" ng-model="user.mobile" type="text" id="phone"/>
+                                <input name="mobile" ng-model="movie.mobile" type="text" id="phone"/>
                             </li>
                             <li>
                                 <label class="label_name">邮箱</label>
                                 <label for="email"></label>
-                                <input name="email" ng-model="user.email" type="text" id="email"/>
+                                <input name="email" ng-model="movie.email" type="text" id="email"/>
                             </li>
                             <li>
                                 <label class="label_name">真实姓名</label>
                                 <label for="user_name"></label>
-                                <input name="trueName" ng-model="user.trueName" type="text"
+                                <input name="trueName" ng-model="movie.trueName" type="text"
                                        id="user_name"/>
                             </li>
                             <li>
@@ -99,7 +99,7 @@
                             </li>
                             <li style="width:524px;position:relative;right:14px;">
                                 <label class="label_name">备注</label>
-                                <textarea name="remark" ng-model="user.remark" type="text" style="width:443px;" id="remark" rows="4" cols="25">
+                                <textarea name="remark" ng-model="movie.remark" type="text" style="width:443px;" id="remark" rows="4" cols="25">
                                 </textarea>
                             </li>
                         </ul>
@@ -150,7 +150,8 @@
                         <td ng-bind="model.tags"></td>
                         <td ng-bind="model.isVip==true?'是':'否'"></td>
                         <td>
-                            <a  href="javascript:void(0);" ng-click="playVideo(model.id)"  >播放</a>
+<!--                            <button type="button" class="btn btn-primary assignBtn" ng-click="asignRole(model.id)"  >查看详情</button>-->
+                            <a href="/video/movie-main/detail?movieId={{model.id}}">查看详情</a>
                         </td>
                     </tr>
                     </tbody>

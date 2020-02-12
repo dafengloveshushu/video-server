@@ -24,11 +24,17 @@ import java.util.List;
 public class MoviePartsServiceImpl extends ServiceImpl<MoviePartsMapper, MovieParts> implements IMoviePartsService {
     @Override
     public MovieParts detail(Integer movieId){
+        return baseMapper.selectById(movieId);
+    }
+
+    @Override
+    public List<MovieParts> detailList(Integer movieId) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("movieId", movieId);
-        List detailList = baseMapper.selectList(queryWrapper);
-        if (detailList != null && detailList.size()>0){
-            return (MovieParts) detailList.get(0);
+        queryWrapper.orderByAsc("title");
+        List<MovieParts> movieParts = baseMapper.selectList(queryWrapper);
+        if(movieParts != null) {
+            return movieParts;
         }
         return null;
     }

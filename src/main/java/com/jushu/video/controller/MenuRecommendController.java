@@ -112,19 +112,28 @@ public class MenuRecommendController {
         if(menuRecommend.getTitle() == null) {
             return new Response("标题不能为空!");
         }
+        //以逗号切割该字段
         String [] splits = menuRecommend.getMovieName().split(",");
+        //用于接收郄格完的电影名
         String movieName = null;
+        //接收id集合
         StringBuilder movieIds = new StringBuilder();
+        //电影表实体
         MovieMain movieMainOne = null;
+        //接收id
+        String movieId = null;
+        //循环当前数组
         if(splits.length > 1) {
             for (int i = 0; i < splits.length; i++) {
                 movieName = splits[i];
+                //根据电影名查找该电影或电视剧是否存在，电影或电视剧查找为精确查找
                 movieMainOne = iMovieMainService.getMovieMainOne(movieName);
                 if (movieMainOne == null) {
                     return new Response("该电影不存在!");
                 }
                 movieIds.append(movieMainOne.getId() + ",");
             }
+            movieId = movieIds.substring(0, movieIds.length() - 1);
         } else {
             for (int i = 0; i < splits.length; i++) {
                 movieName = splits[i];
@@ -138,7 +147,7 @@ public class MenuRecommendController {
         boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
         if (flag) {
             int recommendId = 0;
-            if(menuRecommend.getTitle().equals("耀君傻叉111")) {
+            if(menuRecommend.getTitle().equals("热门电影")) {
                 recommendId = 1;
             }
             if(menuRecommend.getTitle().equals("热门美剧")) {
@@ -150,7 +159,7 @@ public class MenuRecommendController {
             if(menuRecommend.getTitle().equals("热门综艺")) {
                 recommendId = 4;
             }
-            boolean update = iMenuRecommendService.update(recommendId, movieIds.toString());
+            boolean update = iMenuRecommendService.update(recommendId, movieId);
             if(update) {
                 return new Response("添加成功");
             } else {
