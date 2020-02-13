@@ -1,11 +1,22 @@
 var menuRecommendApp = angular.module('menuRecommendApp', ['base']);
 menuRecommendApp.controller('menuRecommendCtrl', ['$rootScope', '$scope','menuRecommendService',function ($rootScope,$scope, menuRecommendService) {
 	$scope.queryFilter = {};
-	//添加推荐电影
-    $scope.insertMenu = function () {
+	//添加推荐电影,1为添加，0为修改
+    $scope.insertMenu = function (sign) {
         var selectArray = $("#User_list tbody input:checked");
-        var titleName = selectArray && selectArray.length>0 ? '修改推荐电影':'添加推荐电影';
-        var movieId = $("#movieNames").val();
+        if(!selectArray || (selectArray.length != 1 && sign == 0)){
+            alertDialog("请选择一个");
+            return;
+        }
+        var titleName = selectArray && selectArray.length > 0 ? '修改推荐电影':'添加推荐电影';
+        // var movieId = $("#movieName").val();
+        var movieId = $(selectArray[0]).val();
+        if(movieId && sign == 0){
+            menuRecommendService.detail(movieId).then(function(response){
+                console.info(response.data);
+                $scope.movie = response.data;
+            });
+        }
         layer.open({
             type : 1,
             title : titleName,
@@ -31,7 +42,17 @@ menuRecommendApp.controller('menuRecommendCtrl', ['$rootScope', '$scope','menuRe
                         menuRecommendService.insertMenu(movie).then(function(response){
                             layer.alert(response.msg, {
                                 title : '提示框',
-                                icon : 1,
+                                icon : 1
+                            },function(){
+                                layer.close(index);
+                                window.location.reload();
+                            });
+                        });
+                    } else {
+                        menuRecommendService.insertMenu(movie).then(function(response){
+                            layer.alert(response.msg, {
+                                title : '提示框',
+                                icon : 1
                             },function(){
                                 layer.close(index);
                                 window.location.reload();
@@ -41,7 +62,7 @@ menuRecommendApp.controller('menuRecommendCtrl', ['$rootScope', '$scope','menuRe
                 }
             }
         });
-    }
+    };
     //删除已有的推荐列表
     $scope.deleteRecommend = function () {
         var selectArray = $("#User_list tbody input:checked");

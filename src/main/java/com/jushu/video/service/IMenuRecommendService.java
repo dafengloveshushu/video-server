@@ -29,4 +29,11 @@ public interface IMenuRecommendService extends IService<MenuRecommend> {
      * @return true为成功，false为失败
      */
     boolean update(@Param("id") Integer id, @Param("movieIds") String movieIds);
+
+    /**
+     * 根据id查找推荐榜单列表
+     * @param id 参数id
+     * @return 返回实体数据
+     */
+    MenuRecommend getMenuRecommendById(@Param("id") Integer id);
 }

@@ -8,6 +8,10 @@ menuRecommendApp.service('menuRecommendService', ['$http', '$q', 'baseService',
                 insertMenu: function (json) {
                     var url = _ctx + '/video/menu-recommend/insert';
                     return baseService.post(url, json);
+                },
+                detail: function (json) {
+                    var url = _ctx + '/video/menu-recommend/detail';
+                    return baseService.post(url, json);
                 }
             }
         }

@@ -109,8 +109,8 @@ public class MenuRecommendController {
         int isSuccess = 0;
         //备注：查询成功
         String remark = "添加成功";
-        if(menuRecommend.getTitle() == null) {
-            return new Response("标题不能为空!");
+        if(menuRecommend.getId() == 0) {
+            return new Response("标题ID不能为空!");
         }
         //以逗号切割该字段
         String [] splits = menuRecommend.getMovieName().split(",");
@@ -146,20 +146,7 @@ public class MenuRecommendController {
         }
         boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
         if (flag) {
-            int recommendId = 0;
-            if(menuRecommend.getTitle().equals("热门电影")) {
-                recommendId = 1;
-            }
-            if(menuRecommend.getTitle().equals("热门美剧")) {
-                recommendId = 2;
-            }
-            if(menuRecommend.getTitle().equals("热门动漫")) {
-                recommendId = 3;
-            }
-            if(menuRecommend.getTitle().equals("热门综艺")) {
-                recommendId = 4;
-            }
-            boolean update = iMenuRecommendService.update(recommendId, movieId);
+            boolean update = iMenuRecommendService.update(menuRecommend.getId(), movieId);
             if(update) {
                 return new Response("添加成功");
             } else {
@@ -167,6 +154,18 @@ public class MenuRecommendController {
             }
         } else {
             return new Response("添加失败");
+        }
+    }
+
+
+    @PostMapping("/detail")
+    @ResponseBody
+    public Response detail(@RequestBody Integer id) {
+        MenuRecommend menuRecommendById = iMenuRecommendService.getMenuRecommendById(id);
+        if(menuRecommendById != null) {
+            return new Response(menuRecommendById);
+        } else {
+            return new Response("出现数据问题,请联系管理员!");
         }
     }
 }

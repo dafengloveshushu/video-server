@@ -15,31 +15,29 @@
         <form id="form1" name="form1" method="post" action="">
             <div class="Manager_style add_user_info search_style">
                 <ul class="search_content clearfix">
-                    <button type="button" class="btn btn-primary resetBtn" ng-click="insertMenu()">添加</button>
+<!--                    <button type="button" class="btn btn-primary resetBtn" ng-click="insertMenu(1)">添加</button>-->
+                    <button type="button" class="btn btn-primary updateBtn" ng-click="insertMenu(0)">修改</button>
                     <button type="button" class="btn btn-primary deleteBtn" ng-click="deleteRecommend()">删除</button>
                 </ul>
                 <div id="Add_user_style" style="display: none">
                     <div class="addCommon clearfix">
                         <ul class="clearfix">
                             <li style="width:524px;position:relative;right:14px;">
-                                <label class="label_name">标签</label>
-                                <label for="title"></label>
-                                <input name="title" value="热门美剧" ng-model="movie.title" type="text" id="title"/>
+                                <label class="label_name">标签ID</label>
+                                <label for="id"></label>
+                                <input name="id" disabled="disabled" ng-model="movie.id" type="text" id="id"/>
                             </li>
-<!--                            -->
-<!--                            <li>-->
-<!--                                <label class="label_name">电影名</label>-->
-<!--                                <label for="movieName"></label>-->
-<!--                                <input name="movieName" ng-model="movie.movieName" type="text" id="movieName"/>-->
-<!--                               -->
-<!--                            </li>-->
                             <li style="width:524px;position:relative;right:14px;">
-                                <label class="label_name">备注</label>
+                                <label class="label_name">推荐电影</label>
                                 <textarea name="movieName" ng-model="movie.movieName" type="text" style="width:443px;" id="movieName" rows="4" cols="25">
                                 </textarea>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <span>可以填入多个电影名，以英文逗号 ',' 隔开</span>
+                                <span>可以填入多个电影名，以英文逗号 ',' 隔开<br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      如存在片名一致，请联系后台管理员手动添加
+                                </span>
                             </li>
                         </ul>
                     </div>

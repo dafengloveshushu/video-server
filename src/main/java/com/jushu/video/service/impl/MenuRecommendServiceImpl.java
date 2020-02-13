@@ -99,4 +99,37 @@ public class MenuRecommendServiceImpl extends ServiceImpl<MenuRecommendMapper, M
         }
         return baseMapper.updateById(deleteMenu) > 0;
     }
+
+    @Override
+    public MenuRecommend getMenuRecommendById(Integer id) {
+        MenuRecommend menuRecommend = baseMapper.selectById(id);
+        if (menuRecommend != null) {
+            Map<String, Object> map = new HashMap<>();
+            String splits [] = null;
+            //电影数据集合
+            List<MovieMain> movieMainList = null;
+            //电影名
+            StringBuilder movieName = new StringBuilder();
+            //根据ids查询电影表中的数据，得到电影名
+            List<String> movieMains = new ArrayList<>();
+            if (menuRecommend.getMovieIds() != null) {
+                splits = menuRecommend.getMovieIds().split(",");
+                for (int i = 0; i < splits.length; i++) {
+                    movieMains.add(splits[i]);
+                }
+                movieMainList = movieMainMapper.selectBatchIds(movieMains);
+                //遍历得到的电影列表
+                for (MovieMain movieMain : movieMainList) {
+                    //得到电影列表中的电影名
+                    movieName.append(movieMain.getName() + ",");
+                }
+                //放入推荐榜单实体类
+                menuRecommend.setMovieName(movieName.substring(0, movieName.length() - 1));
+                map.put(menuRecommend.getMovieIds(), menuRecommend.getMovieName());
+            } else {
+                map.put(menuRecommend.getMovieIds(), menuRecommend.getMovieName());
+            }
+        }
+       return menuRecommend;
+    }
 }

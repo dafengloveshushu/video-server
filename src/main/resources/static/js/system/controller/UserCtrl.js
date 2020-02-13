@@ -91,7 +91,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 				}
 			}
 		});
-	}
+	};
 	//重置密码
 	$scope.resetPwd =function(){
 		var selectArray = $("#User_list tbody input:checked");
@@ -117,7 +117,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 				});
 			});
 		});
-	}
+	};
 	
 	//删除电影
 	$scope.deleteMovie = function(){
@@ -146,7 +146,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 				});
 			});
 		});
-	}
+	};
 
 	//电影添加vip标签
 	$scope.addVipTag = function(){
@@ -175,7 +175,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 				});
 			});
 		});
-	}
+	};
 
 	//电影添加vip标签
 	$scope.delVipTag = function(){
@@ -204,7 +204,7 @@ userApp.controller('userCtrl', ['$rootScope', '$scope','userService',function ($
 				});
 			});
 		});
-	}
+	};
 
 	$scope.asignRole = function(){
 		var movieId = $("#movieId").val();
