@@ -27,7 +27,7 @@ import java.util.List;
  * @author chen
  * @since 2020-02-13
  */
-@RestController
+@Controller
 @RequestMapping("/video/menu-movie-type")
 public class MenuMovieTypeController {
         @Autowired
