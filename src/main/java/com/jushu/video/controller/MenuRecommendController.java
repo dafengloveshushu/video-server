@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -119,7 +120,7 @@ public class MenuRecommendController {
         //接收id集合
         StringBuilder movieIds = new StringBuilder();
         //电影表实体
-        MovieMain movieMainOne = null;
+        List<MovieMain> movieMainOne = new ArrayList<>();
         //接收id
         String movieId = null;
         //循环当前数组
@@ -127,22 +128,22 @@ public class MenuRecommendController {
             for (int i = 0; i < splits.length; i++) {
                 movieName = splits[i];
                 //根据电影名查找该电影或电视剧是否存在，电影或电视剧查找为精确查找
-                movieMainOne = iMovieMainService.getMovieMainOne(movieName);
+                //可能存在多个电影名相同的情况，取第一条数据
+                movieMainOne = iMovieMainService.getMovieMainList(movieName);
                 if (movieMainOne == null) {
                     return new Response("该电影不存在!");
                 }
-                movieIds.append(movieMainOne.getId() + ",");
+                if (movieMainOne.size() > 1) {
+                    movieIds.append(movieMainOne.get(0).getId() + ",");
+                }
             }
             movieId = movieIds.substring(0, movieIds.length() - 1);
         } else {
-            for (int i = 0; i < splits.length; i++) {
-                movieName = splits[i];
-                movieMainOne = iMovieMainService.getMovieMainOne(movieName);
-                if (movieMainOne == null) {
-                    return new Response("该电影不存在!");
-                }
-                movieIds.append(String.valueOf(movieMainOne.getId()));
+            movieMainOne = iMovieMainService.getMovieMainList(movieName);
+            if (movieMainOne == null) {
+                return new Response("该电影不存在!");
             }
+            movieIds.append(String.valueOf(movieMainOne.get(0).getId()));
         }
         boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
         if (flag) {

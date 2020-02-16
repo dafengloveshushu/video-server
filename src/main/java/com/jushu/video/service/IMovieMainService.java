@@ -36,7 +36,7 @@ public interface IMovieMainService extends IService<MovieMain> {
      * @param movieName 电影名
      * @return 电影记录
      */
-    MovieMain getMovieMainOne(String movieName);
+    List<MovieMain> getMovieMainList(String movieName);
 
     /**
      * 根据电影id查询该条电影记录

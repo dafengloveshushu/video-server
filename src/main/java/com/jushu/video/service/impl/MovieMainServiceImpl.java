@@ -107,10 +107,10 @@ public class MovieMainServiceImpl extends ServiceImpl<MovieMainMapper, MovieMain
     }
 
     @Override
-    public MovieMain getMovieMainOne(String movieName) {
+    public List<MovieMain> getMovieMainList(String movieName) {
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("name", movieName);
-        return baseMapper.selectOne(queryWrapper);
+        return baseMapper.selectList(queryWrapper);
     }
 
     @Override
