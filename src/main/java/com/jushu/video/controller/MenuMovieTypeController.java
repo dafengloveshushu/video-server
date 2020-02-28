@@ -34,13 +34,8 @@ public class MenuMovieTypeController {
         private IMenuMovieTypeService iMenuMovieTypeService;
 
         @Autowired
-        private IMenuRecommendService iMenuRecommendService;
-
-        @Autowired
         private IGmOperationService iGmOperationService;
 
-        @Autowired
-        private IMovieMainService iMovieMainService;
 
         @GetMapping("/list")
         public String list(){ return "menuMovieTypeList";}
@@ -81,11 +76,15 @@ public class MenuMovieTypeController {
             //备注：查询成功
             String remark = "删除成功";
             boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
-            boolean delete = iMenuMovieTypeService.delete(ids);
-            if(delete) {
-                return new Response("删除成功");
+            if(flag) {
+                boolean delete = iMenuMovieTypeService.delete(ids);
+                if (delete) {
+                    return new Response("删除成功!");
+                } else {
+                    return new Response("删除失败!");
+                }
             } else {
-                return new Response("删除失败");
+                return new Response("删除失败!");
             }
         }
 
@@ -105,11 +104,16 @@ public class MenuMovieTypeController {
             if(menuMovieType.getTitle() == null) {
                 return new Response("标题不能为空!");
             }
-            boolean update = iMenuMovieTypeService.create(menuMovieType);
-            if(update) {
-                return new Response("添加成功");
+            boolean flag = iGmOperationService.saveOperation(method, loginIp, operation, isSuccess, remark, session);
+            if(flag) {
+                boolean update = iMenuMovieTypeService.create(menuMovieType);
+                if (update) {
+                    return new Response("添加成功!");
+                } else {
+                    return new Response("添加失败!");
+                }
             } else {
-                return new Response("添加失败");
+                return new Response("添加失败!");
             }
         }
 }

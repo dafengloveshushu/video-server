@@ -1,6 +1,5 @@
 package com.jushu.video;
 
-import cn.hutool.db.Db;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
@@ -10,7 +9,6 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-import com.jushu.video.entity.MenuRecommend;
 import com.jushu.video.service.IMenuRecommendService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +25,17 @@ class VideoServerApplicationTests {
 
     @Test
     void contextTest(){
-        List<MenuRecommend> recommendList = iMenuRecommendService.recommendList();
-        for (MenuRecommend menuRecommend : recommendList) {
-            System.out.println(menuRecommend.getId());
-            System.out.println(menuRecommend.getMovieIds());
-            System.out.println(menuRecommend.getMovieName());
-            System.out.println(menuRecommend.getTitle());
-        }
+        Thread t = new Thread() {
+            public void run() {
+                pong();
+            }
+        };
+        t.run();
+        System.out.println("ping");
+    }
+
+    static void pong(){
+        System.out.println("pong");
     }
 
     @Test
@@ -146,7 +148,7 @@ class VideoServerApplicationTests {
         strategy.setRestControllerStyle(true);
         //写于父类中的公共字段
 //        strategy.setSuperEntityColumns("");
-        String tableNames = "menu_movie_type";
+        String tableNames = "app_configuration";
         strategy.setInclude(tableNames.split(","));
         strategy.setControllerMappingHyphenStyle(true);
         strategy.setTablePrefix(pc.getModuleName() + "_");

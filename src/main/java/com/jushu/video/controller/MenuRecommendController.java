@@ -88,12 +88,12 @@ public class MenuRecommendController {
             }
             boolean update = iMenuRecommendService.update(Integer.valueOf(num), null);
             if(update) {
-                return new Response("删除成功");
+                return new Response("删除成功!");
             } else {
-                return new Response("删除失败");
+                return new Response("删除失败!");
             }
         } else {
-            return new Response("删除失败");
+            return new Response("删除失败!");
         }
     }
 
@@ -149,12 +149,12 @@ public class MenuRecommendController {
         if (flag) {
             boolean update = iMenuRecommendService.update(menuRecommend.getId(), movieId);
             if(update) {
-                return new Response("添加成功");
+                return new Response("添加成功!");
             } else {
-                return new Response("添加失败");
+                return new Response("添加失败!");
             }
         } else {
-            return new Response("添加失败");
+            return new Response("添加失败!");
         }
     }
 

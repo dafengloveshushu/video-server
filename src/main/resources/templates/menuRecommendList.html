@@ -15,10 +15,20 @@
         <form id="form1" name="form1" method="post" action="">
             <div class="Manager_style add_user_info search_style">
                 <ul class="search_content clearfix">
-<!--                    <button type="button" class="btn btn-primary resetBtn" ng-click="insertMenu(1)">添加</button>-->
-                    <button type="button" class="btn btn-primary updateBtn" ng-click="insertMenu(0)">修改</button>
+                    <button type="button" class="btn btn-primary resetBtn" ng-click="insertMenu(1)">设置vip电影可观看时间段</button>
+                    <button type="button" class="btn btn-primary updateBtn" ng-click="updateMenu(0)">修改</button>
                     <button type="button" class="btn btn-primary deleteBtn" ng-click="deleteRecommend()">删除</button>
                 </ul>
+                <div id="App_user_style" style="display: none">
+                    <div class="addCommon clearfix">
+                        <ul class="clearfix">
+                            <li style="width:524px;position:relative;right:14px;">
+                                <label class="label_name">播放时间段</label>
+                                <input name="configValue" ng-model="app.configValue" type="text" style="width:443px;" id="configValue" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div id="Add_user_style" style="display: none">
                     <div class="addCommon clearfix">
                         <ul class="clearfix">

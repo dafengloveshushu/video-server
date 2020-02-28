@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/js/system/dplayer/dplayer.min.css}"/>
+    <script th:src="@{/js/lib/jquery/jquery-1.8.3.min.js}"></script>
+    <script th:src="@{/js/system/dplayer/hls.min.js}"></script>
+    <script th:src="@{/js/system/dplayer/dplayer.min.js}"></script>
+</head>
+<body>
+    <div class="row main">
+        <div class="col-md-12">
+            <div class="container" style="width: 96%; margin: 30px auto">
+               <div id="dplayer" style="width:600px;height:400px;"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var videoObject = new DPlayer({
+        container: document.getElementById('dplayer'),
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: true,
+        lang: 'zh-cn',
+        screenshot: true,
+        hotkey: true,
+        preload: 'auto',
+        volume: 0.7,
+        mutex: true,
+        video: {
+            url: 'https://cn5.7639616.com/hls/20191119/8133e9192b53b3e61ecab26a667a9ce5/1574148962/index.m3u8',
+            type: 'auto'
+        }
+    });
+</script>
+</html>
