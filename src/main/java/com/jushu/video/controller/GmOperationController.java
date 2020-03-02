@@ -8,8 +8,6 @@ import com.jushu.video.api.Response;
 import com.jushu.video.common.IpUtil;
 import com.jushu.video.entity.GmOperation;
 import com.jushu.video.service.IGmOperationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="configurationApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" th:href="@{/assets/select-mutiple/css/select-multiple.css}"/>
+    <header th:replace="importCommon"></header>
+    <header th:replace="importDate"></header>
+    <script th:src="@{/js/system/controller/AppConfigurationCtrl.js}"></script>
+    <script th:src="@{/js/system/service/Configuration.js}"></script>
+    <title>系统配置列表</title>
+</head>
+<body ng-controller="configurationCtrl">
+<div id="container"></div>
+<div class="page-content">
+    <div class="commonManager">
+        <form id="form1" name="form1" method="post" action="">
+            <div class="Manager_style add_user_info search_style">
+                <ul class="search_content clearfix">
+                    <button type="button" class="btn btn-primary resetBtn" ng-click="insertAppConfig(1)">添加</button>
+                    <button type="button" class="btn btn-primary updateBtn" ng-click="insertAppConfig(0)">修改</button>
+                    <button type="button" class="btn btn-primary deleteBtn" ng-click="deleteAppConfig()">删除</button>
+                </ul>
+                <div id="App_user_style" style="display: none">
+                    <div class="addCommon clearfix">
+                        <ul class="clearfix">
+                            <li style="width:524px;position:relative;right:14px;">
+                                <label class="label_name">配置名</label>
+                                <input name="configKey" ng-model="app.configKey" type="text" style="width:443px;" id="configKey" />
+                            </li>
+                            <li style="width:524px;position:relative;right:14px;">
+                                <label class="label_name">配置值</label>
+                                <input name="configValue" ng-model="app.configValue" type="text" style="width:443px;" id="configValue" />
+                            </li>
+                            <li style="width:524px;position:relative;right:14px;">
+                                <label class="label_name">备注</label>
+                                <input name="remark" ng-model="app.remark" type="text" style="width:443px;" id="remark" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="commonManager">
+            <div class="webLog_list">
+                <table id="webLog_list" cellpadding="0" cellspacing="0"
+                       class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>
+                            <input name="userCheckBox_All" id="userCheckBox_All" type="checkbox" ng-click="selectAll($event)" class="ace"/>
+                            <span class="lbl" style="cursor:pointer;"></span>
+                        </th>
+                        <th>编号</th>
+                        <th>配置名</th>
+                        <th>配置值</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="appConfig in data">
+                        <td>
+                            <input name="subUserChkBox_{{$index}}" value="{{appConfig.id}}" type="checkbox" class="ace subUserChkbox"/>
+                            <span class="lbl" style="cursor:pointer;"></span>
+                        </td>
+                        <td ng-bind="appConfig.id"></td>
+                        <td ng-bind="appConfig.configKey"></td>
+                        <td ng-bind="appConfig.configValue"></td>
+                        <td ng-bind="appConfig.remark"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="hupan_more eg-page" ng-init="" url="/video/app-configuration/list" request-page-params="queryFilter"
+                 click-search="webLogSearch" return-page-rows="data"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
