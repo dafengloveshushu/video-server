@@ -61,10 +61,10 @@ class VideoServerApplicationTests {
         dsc.setTypeConvert(new MySqlTypeConvert() {
            @Override
            public DbColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
-               if(fieldType.toLowerCase().contains("datetime")) {
-                    return DbColumnType.DATE;
-               }
-               return (DbColumnType) super.processTypeConvert(globalConfig, fieldType);
+           if(fieldType.toLowerCase().contains("datetime")) {
+                return DbColumnType.DATE;
+           }
+           return (DbColumnType) super.processTypeConvert(globalConfig, fieldType);
            }
         });
         mpg.setDataSource(dsc);

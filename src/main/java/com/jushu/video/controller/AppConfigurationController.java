@@ -46,7 +46,7 @@ public class AppConfigurationController {
     @ResponseBody
     public Response list(@RequestBody ParamFilter queryFilter, HttpServletRequest request, HttpSession session) {
         //new 一个mybatis plus分页对象
-        Page<AppConfiguration> page = new Page<>();
+        Page<AppConfiguration> page = new Page<AppConfiguration>();
         //pages为自己封装的分页工具类，对应页面
         Pages pages = queryFilter.getPage();
         //如果pages不为空，则为page放入当前页、每页显示条数
