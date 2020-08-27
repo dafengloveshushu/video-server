@@ -16,7 +16,7 @@ spring:
     servlet:
       content-type: text/html
 server:
-  port: 30097     #项目端口号
+  port: 9700     #项目端口号
 #日志
 logging:
   level:
