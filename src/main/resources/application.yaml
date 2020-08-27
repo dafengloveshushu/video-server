@@ -15,8 +15,7 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
-server:
-  port: 9700     #项目端口号
+
 #日志
 logging:
   level:
@@ -31,3 +30,5 @@ logging:
         video:
           mapper: debug
 
+server:
+  port: 9700
